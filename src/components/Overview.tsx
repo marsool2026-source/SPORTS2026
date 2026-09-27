@@ -68,6 +68,27 @@ export default function Overview() {
 
         {/* Key Features */}
         <div className="mt-16 grid md:grid-cols-2 gap-6">
+          <div className="glass-card p-6 border border-purple-500/20">
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="text-2xl">🪪</span>
+              QR تلقائي + كارنيه رقمي عند التسجيل
+            </h3>
+            <ul className="space-y-3">
+              {[
+                'عند تسجيل أي مستخدم (لاعب/مدرب/مدير) يُنشأ QR تلقائياً',
+                'يُدمج الـ QR مباشرة في تصميم الكارنيه الرقمي',
+                'الكود التسلسلي فريد ومرتبط بسنة الميلاد والدور',
+                'تجديد تلقائي سنوي للكارنيه مع الحفاظ على نفس الـ QR',
+                'قابل للمسح من أي هاتف أو ماسح معتمد'
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
+                  <span className="text-purple-400 mt-0.5">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="glass-card p-6 border border-emerald-500/20">
             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
               <span className="text-2xl">📱</span>

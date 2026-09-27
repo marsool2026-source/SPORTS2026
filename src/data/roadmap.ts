@@ -97,10 +97,10 @@ export const roadmapData: Phase[] = [
         estimatedDays: 3
       },
       {
-        name: "الكارنيه الرقمي السنوي",
-        description: "بطاقة تعريفية ذكية قابلة للتجديد تلقائياً",
+        name: "الكارنيه الرقمي السنوي + QR تلقائي",
+        description: "عند تسجيل أي مستخدم (لاعب/مدرب/مدير) يُنشأ QR تلقائياً ويُدمج في تصميم الكارنيه",
         priority: "critical",
-        estimatedDays: 7
+        estimatedDays: 8
       },
       {
         name: "نظام التصنيف السني",

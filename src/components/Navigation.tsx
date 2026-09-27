@@ -13,6 +13,7 @@ export default function Navigation() {
   const links = [
     { href: '#overview', label: 'نظرة عامة' },
     { href: '#timeline', label: 'خارطة الطريق' },
+    { href: '#digital-card', label: 'الكارنيه الرقمي' },
     { href: '#attendance', label: 'نظام الحضور' },
     { href: '#architecture', label: 'البنية المعمارية' },
     { href: '#summary', label: 'الملخص' },
