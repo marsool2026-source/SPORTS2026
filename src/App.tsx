@@ -1,7 +1,9 @@
+import { ThemeProvider } from './contexts/ThemeContext';
 import ProgressBar from './components/ProgressBar';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import DesignPreview from './components/DesignPreview';
+import ThemeSelector from './components/ThemeSelector';
 import LoginScreen from './components/LoginScreen';
 import Overview from './components/Overview';
 import Timeline from './components/Timeline';
@@ -18,24 +20,27 @@ import Footer from './components/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen text-white overflow-x-hidden">
-      <ProgressBar />
-      <Navigation />
-      <Hero />
-      <DesignPreview />
-      <LoginScreen />
-      <Overview />
-      <Timeline />
-      <DigitalCardSystem />
-      <AttendanceSystem />
-      <CommunicationSystem />
-      <FinancialSystem />
-      <IntegrationFlow />
-      <Architecture />
-      <Summary />
-      <FAQ />
-      <CallToAction />
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen text-white overflow-x-hidden">
+        <ProgressBar />
+        <Navigation />
+        <Hero />
+        <DesignPreview />
+        <ThemeSelector />
+        <LoginScreen />
+        <Overview />
+        <Timeline />
+        <DigitalCardSystem />
+        <AttendanceSystem />
+        <CommunicationSystem />
+        <FinancialSystem />
+        <IntegrationFlow />
+        <Architecture />
+        <Summary />
+        <FAQ />
+        <CallToAction />
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }
