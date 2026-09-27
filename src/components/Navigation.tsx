@@ -15,6 +15,7 @@ export default function Navigation() {
     { href: '#timeline', label: 'خارطة الطريق' },
     { href: '#digital-card', label: 'الكارنيه' },
     { href: '#attendance', label: 'الحضور' },
+    { href: '#communication', label: 'التواصل' },
     { href: '#financial', label: 'المالية' },
     { href: '#integration', label: 'التكامل' },
     { href: '#summary', label: 'الملخص' },

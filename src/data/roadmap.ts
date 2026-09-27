@@ -213,6 +213,12 @@ export const roadmapData: Phase[] = [
         estimatedDays: 5
       },
       {
+        name: "مركز التواصل التدريبي",
+        description: "شات + مكالمات صوتية + فيديو كول + مشاركة ملفات بين المدرب والمجموعة",
+        priority: "critical",
+        estimatedDays: 10
+      },
+      {
         name: "إدارة خطوط الباصات",
         description: "تتبع مسارات النقل وحالة كل خط",
         priority: "high",

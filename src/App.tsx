@@ -6,6 +6,7 @@ import Timeline from './components/Timeline';
 import DigitalCardSystem from './components/DigitalCardSystem';
 import AttendanceSystem from './components/AttendanceSystem';
 import FinancialSystem from './components/FinancialSystem';
+import CommunicationSystem from './components/CommunicationSystem';
 import IntegrationFlow from './components/IntegrationFlow';
 import Architecture from './components/Architecture';
 import Summary from './components/Summary';
@@ -23,6 +24,7 @@ export default function App() {
       <Timeline />
       <DigitalCardSystem />
       <AttendanceSystem />
+      <CommunicationSystem />
       <FinancialSystem />
       <IntegrationFlow />
       <Architecture />
