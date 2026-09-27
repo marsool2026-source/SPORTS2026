@@ -68,6 +68,27 @@ export default function Overview() {
 
         {/* Key Features */}
         <div className="mt-16 grid md:grid-cols-2 gap-6">
+          <div className="glass-card p-6 border border-emerald-500/20">
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="text-2xl">📱</span>
+              تسجيل الحضور عبر QR Code
+            </h3>
+            <ul className="space-y-3">
+              {[
+                'كل لاعب يحصل على كود QR فريد في الكارنيه الرقمي',
+                'المدرب يمسح الكود → يُسجَّل الحضور تلقائياً',
+                'يعمل بدون إنترنت (Offline Mode) ثم المزامنة',
+                'تحقق بالموقع الجغرافي لمنع الغش',
+                'تقارير فورية تُرسل للإدارة تلقائياً'
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2 text-gray-300 text-sm">
+                  <span className="text-emerald-400 mt-0.5">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="glass-card p-6">
             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
               <span className="text-2xl">🔐</span>

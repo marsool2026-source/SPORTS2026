@@ -195,10 +195,22 @@ export const roadmapData: Phase[] = [
     icon: "⚽",
     modules: [
       {
-        name: "نظام الحضور والغياب",
-        description: "تسجيل عبر QR Code مع إحصائيات فورية",
+        name: "نظام الحضور عبر QR Code",
+        description: "مسح كود اللاعب من الكارنيه الرقمي → تسجيل فوري مع الوقت والتاريخ + وضع Offline",
         priority: "critical",
-        estimatedDays: 6
+        estimatedDays: 8
+      },
+      {
+        name: "توليد أكواد QR للاعبين",
+        description: "كل لاعب يحصل على QR فريد مشفر مرتبط بالكارنيه الرقمي",
+        priority: "critical",
+        estimatedDays: 4
+      },
+      {
+        name: "واجهة المدرب للمسح",
+        description: "كاميرا مدمجة + تحقق بالموقع الجغرافي + دعم الماسحات الخارجية",
+        priority: "critical",
+        estimatedDays: 5
       },
       {
         name: "إدارة خطوط الباصات",
@@ -232,13 +244,14 @@ export const roadmapData: Phase[] = [
       }
     ],
     deliverables: [
-      "✅ نظام حضور ذكي بـ QR Code",
+      "✅ نظام مسح QR فوري للحضور والغياب",
+      "✅ أكواد QR مشفرة فريدة لكل لاعب",
+      "✅ واجهة مدرب بكاميرا مدمجة + GPS",
       "✅ إدارة خطوط باصات متكاملة",
       "✅ جدولة تدريبات تفاعلية",
-      "✅ نظام بطولات وأرقام قياسية",
-      "✅ لوحات متابعة الأداء"
+      "✅ تقارير حضور تلقائية للإدارة"
     ],
-    techStack: ["FullCalendar", "Mapbox/Google Maps", "D3.js", "WebSocket", "Geolocation API"]
+    techStack: ["QR Scanner (html5-qrcode)", "Geolocation API", "IndexedDB (Offline)", "FullCalendar", "Mapbox", "WebSocket"]
   },
   {
     id: 5,
