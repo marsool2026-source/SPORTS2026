@@ -10,6 +10,13 @@ import Timeline from './components/Timeline';
 import DigitalCardSystem from './components/DigitalCardSystem';
 import AttendanceSystem from './components/AttendanceSystem';
 import CommunicationSystem from './components/CommunicationSystem';
+import TournamentsSection from './components/TournamentsSection';
+import PerformanceTracking from './components/PerformanceTracking';
+import BusManagement from './components/BusManagement';
+import ProductsStore from './components/ProductsStore';
+import ScheduleCalendar from './components/ScheduleCalendar';
+import PricingPlans from './components/PricingPlans';
+import NotificationCenter from './components/NotificationCenter';
 import FinancialSystem from './components/FinancialSystem';
 import IntegrationFlow from './components/IntegrationFlow';
 import Architecture from './components/Architecture';
@@ -33,6 +40,13 @@ export default function App() {
         <DigitalCardSystem />
         <AttendanceSystem />
         <CommunicationSystem />
+        <TournamentsSection />
+        <PerformanceTracking />
+        <BusManagement />
+        <ProductsStore />
+        <ScheduleCalendar />
+        <PricingPlans />
+        <NotificationCenter />
         <FinancialSystem />
         <IntegrationFlow />
         <Architecture />

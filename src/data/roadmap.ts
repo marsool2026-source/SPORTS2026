@@ -23,7 +23,7 @@ export const roadmapData: Phase[] = [
     id: 1,
     title: "المرحلة الأولى: البنية التحتية والأساسيات",
     subtitle: "تأسيس النظام وإعداد البيئة التطويرية",
-    duration: "4-6 أسابيع",
+    duration: "6-8 أسابيع",
     status: "completed",
     color: "from-emerald-500 to-teal-600",
     icon: "🏗️",
@@ -376,10 +376,10 @@ export const systemOverview = {
   nameEn: "Enterprise Sports Academy System",
   description: "منصة مؤسسية متكاملة لإدارة الأكاديميات الرياضية بمستوى احترافي",
   stats: [
-    { label: "وحدات النظام", value: "35+", icon: "📦" },
+    { label: "وحدات النظام", value: "60+", icon: "📦" },
     { label: "أدوار المستخدمين", value: "5", icon: "👤" },
     { label: "مراحل التطوير", value: "6", icon: "🎯" },
-    { label: "المدة الإجمالية", value: "28-38 أسبوع", icon: "📅" }
+    { label: "المدة الإجمالية", value: "36-48 أسبوع", icon: "📅" }
   ],
   roles: [
     { name: "المدير العام", icon: "👑", permissions: "تحكم كامل في النظام" },

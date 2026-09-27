@@ -71,6 +71,33 @@ export default function FinancialSystem() {
           ))}
         </div>
 
+        {/* Important Notice: Payment Policy */}
+        <div className="glass-card p-5 mb-8 border border-amber-500/30 bg-amber-500/5">
+          <div className="flex items-start gap-3">
+            <span className="text-3xl">🔒</span>
+            <div>
+              <h4 className="text-amber-300 font-bold text-sm mb-2">سياسة السداد المعتمدة</h4>
+              <div className="text-gray-300 text-xs leading-relaxed space-y-2">
+                <p>
+                  <strong className="text-white">1. رفع الإيصال:</strong> يقوم ولي الأمر برفع صورة إيصال التحويل من المحفظة الإلكترونية.
+                </p>
+                <p>
+                  <strong className="text-white">2. حالة "معلق":</strong> يبقى الاشتراك في حالة <span className="text-amber-300 font-bold">"معلق بانتظار الاعتماد"</span> ولا يتم تفعيله تلقائياً.
+                </p>
+                <p>
+                  <strong className="text-white">3. التحقق الفعلي:</strong> يقوم المدير المالي بالتحقق من وصول المبلغ فعلياً إلى محفظة الأكاديمية.
+                </p>
+                <p>
+                  <strong className="text-white">4. الاعتماد النهائي:</strong> فقط بعد التأكد من وصول التحويل، يتم <span className="text-emerald-300 font-bold">اعتماد الدفع وتفعيل الاشتراك</span>.
+                </p>
+                <p className="text-amber-200 font-semibold mt-2">
+                  ⚠️ لا يمكن للإداري التشغيلي تجاوز هذه السياسة أو تفعيل الاشتراكات مالياً.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Interactive Demo: Financial Manager Dashboard */}
         <div className="glass-card p-6 md:p-8">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
