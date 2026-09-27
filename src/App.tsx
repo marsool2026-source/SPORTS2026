@@ -1,6 +1,7 @@
 import ProgressBar from './components/ProgressBar';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import DesignPreview from './components/DesignPreview';
 import LoginScreen from './components/LoginScreen';
 import Overview from './components/Overview';
 import Timeline from './components/Timeline';
@@ -21,6 +22,7 @@ export default function App() {
       <ProgressBar />
       <Navigation />
       <Hero />
+      <DesignPreview />
       <LoginScreen />
       <Overview />
       <Timeline />

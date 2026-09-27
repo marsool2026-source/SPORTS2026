@@ -11,6 +11,7 @@ export default function Navigation() {
   }, []);
 
   const links = [
+    { href: '#design-preview', label: 'التصميمات' },
     { href: '#login', label: 'تسجيل الدخول' },
     { href: '#overview', label: 'نظرة عامة' },
     { href: '#timeline', label: 'خارطة الطريق' },
