@@ -35,6 +35,12 @@ export const roadmapData: Phase[] = [
         estimatedDays: 3
       },
       {
+        name: "شاشة تسجيل الدخول الاحترافية",
+        description: "واجهة زجاجية مع حركات سلسة، دائرة أيقونات رياضية، دعم ثنائي اللغة، وتسجيل اجتماعي",
+        priority: "critical",
+        estimatedDays: 5
+      },
+      {
         name: "نظام المصادقة (Auth System)",
         description: "تسجيل الدخول/إنشاء حساب مع JWT وواجهات زجاجية متحركة",
         priority: "critical",

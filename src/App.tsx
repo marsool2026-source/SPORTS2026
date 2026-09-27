@@ -1,12 +1,13 @@
 import ProgressBar from './components/ProgressBar';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import LoginScreen from './components/LoginScreen';
 import Overview from './components/Overview';
 import Timeline from './components/Timeline';
 import DigitalCardSystem from './components/DigitalCardSystem';
 import AttendanceSystem from './components/AttendanceSystem';
-import FinancialSystem from './components/FinancialSystem';
 import CommunicationSystem from './components/CommunicationSystem';
+import FinancialSystem from './components/FinancialSystem';
 import IntegrationFlow from './components/IntegrationFlow';
 import Architecture from './components/Architecture';
 import Summary from './components/Summary';
@@ -20,6 +21,7 @@ export default function App() {
       <ProgressBar />
       <Navigation />
       <Hero />
+      <LoginScreen />
       <Overview />
       <Timeline />
       <DigitalCardSystem />
