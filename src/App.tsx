@@ -17,6 +17,14 @@ import ProductsStore from './components/ProductsStore';
 import ScheduleCalendar from './components/ScheduleCalendar';
 import PricingPlans from './components/PricingPlans';
 import NotificationCenter from './components/NotificationCenter';
+import TestimonialsSection from './components/TestimonialsSection';
+import CoachesSection from './components/CoachesSection';
+import GallerySection from './components/GallerySection';
+import LiveStats from './components/LiveStats';
+import PackageQuiz from './components/PackageQuiz';
+import ContactMap from './components/ContactMap';
+import BlogSection from './components/BlogSection';
+import PartnersSection from './components/PartnersSection';
 import FinancialSystem from './components/FinancialSystem';
 import IntegrationFlow from './components/IntegrationFlow';
 import Architecture from './components/Architecture';
@@ -47,6 +55,14 @@ export default function App() {
         <ScheduleCalendar />
         <PricingPlans />
         <NotificationCenter />
+        <TestimonialsSection />
+        <CoachesSection />
+        <GallerySection />
+        <LiveStats />
+        <PackageQuiz />
+        <ContactMap />
+        <BlogSection />
+        <PartnersSection />
         <FinancialSystem />
         <IntegrationFlow />
         <Architecture />
