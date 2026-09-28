@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import DesignPreview from './components/DesignPreview';
 import ThemeSelector from './components/ThemeSelector';
 import LoginScreen from './components/LoginScreen';
+import AboutUs from './components/AboutUs';
 import Overview from './components/Overview';
 import Timeline from './components/Timeline';
 import DigitalCardSystem from './components/DigitalCardSystem';
@@ -22,6 +23,7 @@ import CoachesSection from './components/CoachesSection';
 import GallerySection from './components/GallerySection';
 import LiveStats from './components/LiveStats';
 import PackageQuiz from './components/PackageQuiz';
+import { BMICalculator, FreeTrialBooking } from './components/InteractiveTools';
 import ContactMap from './components/ContactMap';
 import BlogSection from './components/BlogSection';
 import PartnersSection from './components/PartnersSection';
@@ -30,6 +32,9 @@ import IntegrationFlow from './components/IntegrationFlow';
 import Architecture from './components/Architecture';
 import Summary from './components/Summary';
 import FAQ from './components/FAQ';
+import { CookieConsent, LegalPages } from './components/LegalPages';
+import { BackToTop, LoadingScreen } from './components/UIElements';
+import { PackageComparison, UpcomingEvents } from './components/AdditionalFeatures';
 import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
 
@@ -37,12 +42,14 @@ export default function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen text-white overflow-x-hidden">
+        <LoadingScreen />
         <ProgressBar />
         <Navigation />
         <Hero />
         <DesignPreview />
         <ThemeSelector />
         <LoginScreen />
+        <AboutUs />
         <Overview />
         <Timeline />
         <DigitalCardSystem />
@@ -60,16 +67,23 @@ export default function App() {
         <GallerySection />
         <LiveStats />
         <PackageQuiz />
+        <BMICalculator />
+        <FreeTrialBooking />
         <ContactMap />
         <BlogSection />
         <PartnersSection />
+        <PackageComparison />
+        <UpcomingEvents />
         <FinancialSystem />
         <IntegrationFlow />
         <Architecture />
         <Summary />
         <FAQ />
+        <LegalPages />
         <CallToAction />
         <Footer />
+        <BackToTop />
+        <CookieConsent />
       </div>
     </ThemeProvider>
   );

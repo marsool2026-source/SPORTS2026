@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sportsacademy.com/sitemap.xml
+
+#Disallow: /admin
+#Disallow: /api
+#Disallow: /private

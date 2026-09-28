@@ -14,6 +14,7 @@ export default function Navigation() {
     { href: '#design-preview', label: 'التصميمات' },
     { href: '#theme-selector', label: 'الثيمات' },
     { href: '#login', label: 'الدخول' },
+    { href: '#about', label: 'من نحن' },
     { href: '#timeline', label: 'خارطة الطريق' },
     { href: '#digital-card', label: 'الكارنيه' },
     { href: '#attendance', label: 'الحضور' },
@@ -30,10 +31,13 @@ export default function Navigation() {
     { href: '#gallery', label: 'المعرض' },
     { href: '#live-stats', label: 'الإحصائيات' },
     { href: '#package-quiz', label: 'اختبار الباقة' },
+    { href: '#bmi-calculator', label: 'حاسبة BMI' },
+    { href: '#free-trial', label: 'تجربة مجانية' },
     { href: '#contact', label: 'التواصل' },
     { href: '#blog', label: 'المدونة' },
     { href: '#partners', label: 'الشركاء' },
     { href: '#financial', label: 'المالية' },
+    { href: '#privacy', label: 'الخصوصية' },
     { href: '#summary', label: 'الملخص' },
   ];
 
