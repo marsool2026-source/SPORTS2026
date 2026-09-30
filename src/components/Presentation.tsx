@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 interface Slide {
   id: number;
@@ -11,6 +13,9 @@ interface Slide {
 export default function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportProgress, setExportProgress] = useState(0);
+  const slidesContainerRef = useRef<HTMLDivElement>(null);
 
   const slides: Slide[] = [
     // Slide 1: Title
@@ -942,6 +947,61 @@ export default function Presentation() {
     }
   };
 
+  const exportToPDF = async () => {
+    setIsExporting(true);
+    setExportProgress(0);
+
+    try {
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'px',
+        format: [1280, 720]
+      });
+
+      const originalSlide = currentSlide;
+
+      for (let i = 0; i < slides.length; i++) {
+        setCurrentSlide(i);
+        setExportProgress(((i + 1) / slides.length) * 100);
+
+        // Wait for render
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const element = slidesContainerRef.current;
+        if (element) {
+          const canvas = await html2canvas(element, {
+            backgroundColor: '#0f172a',
+            scale: 2,
+            useCORS: true,
+            logging: false
+          });
+
+          const imgData = canvas.toDataURL('image/png');
+          
+          if (i > 0) {
+            pdf.addPage();
+          }
+          
+          pdf.addImage(imgData, 'PNG', 0, 0, 1280, 720);
+        }
+      }
+
+      // Restore original slide
+      setCurrentSlide(originalSlide);
+
+      // Save PDF
+      pdf.save('منظومة-أكاديمية-الرياضات-الاحترافية.pdf');
+      
+      setIsExporting(false);
+      setExportProgress(0);
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+      setIsExporting(false);
+      setExportProgress(0);
+      alert('حدث خطأ أثناء تصدير PDF. يرجى المحاولة مرة أخرى.');
+    }
+  };
+
   const currentSlideData = slides[currentSlide];
 
   return (
@@ -962,6 +1022,23 @@ export default function Presentation() {
             {currentSlide + 1} / {slides.length}
           </span>
           <button
+            onClick={exportToPDF}
+            disabled={isExporting}
+            className="px-4 py-2 bg-gradient-to-l from-emerald-500 to-teal-600 text-white text-sm font-bold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            {isExporting ? (
+              <>
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span>جاري التصدير... {Math.round(exportProgress)}%</span>
+              </>
+            ) : (
+              <>
+                <span>📥</span>
+                <span>تحميل PDF</span>
+              </>
+            )}
+          </button>
+          <button
             onClick={() => setIsFullscreen(!isFullscreen)}
             className="px-4 py-2 glass-card text-white text-sm rounded-lg hover:bg-white/10 transition-colors"
           >
@@ -971,7 +1048,7 @@ export default function Presentation() {
       </div>
 
       {/* Slide Content */}
-      <div className="flex-1 p-8 max-w-7xl mx-auto">
+      <div className="flex-1 p-8 max-w-7xl mx-auto" ref={slidesContainerRef}>
         <div className="mb-8">
           <h2 className="text-4xl font-black text-white mb-2">{currentSlideData.title}</h2>
           {currentSlideData.subtitle && (
