@@ -43,6 +43,7 @@ import LiveStreaming from './components/LiveStreaming';
 import ReferralSystem from './components/ReferralSystem';
 import CouponSystem from './components/CouponSystem';
 import InvoiceSystem from './components/InvoiceSystem';
+import Presentation from './components/Presentation';
 
 // Lazy load heavy components for better performance
 const InteractiveDashboard = lazy(() => import('./components/InteractiveDashboard'));
@@ -98,6 +99,7 @@ export default function App() {
         <ReferralSystem />
         <CouponSystem />
         <InvoiceSystem />
+        <Presentation />
         <BMICalculator />
         <FreeTrialBooking />
         <ContactMap />

@@ -37,6 +37,7 @@ export default function Navigation() {
     { href: '#blog', label: 'المدونة' },
     { href: '#partners', label: 'الشركاء' },
     { href: '#financial', label: 'المالية' },
+    { href: '#presentation', label: 'العرض التقديمي' },
     { href: '#privacy', label: 'الخصوصية' },
     { href: '#summary', label: 'الملخص' },
   ];
