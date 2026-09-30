@@ -15,6 +15,7 @@ export default function Navigation() {
     { href: '#theme-selector', label: 'الثيمات' },
     { href: '#login', label: 'الدخول' },
     { href: '#about', label: 'من نحن' },
+    { href: '#system-overview', label: '🗺️ نظرة عامة' },
     { href: '#timeline', label: 'خارطة الطريق' },
     { href: '#digital-card', label: 'الكارنيه' },
     { href: '#attendance', label: 'الحضور' },

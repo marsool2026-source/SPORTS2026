@@ -44,6 +44,7 @@ import ReferralSystem from './components/ReferralSystem';
 import CouponSystem from './components/CouponSystem';
 import InvoiceSystem from './components/InvoiceSystem';
 import Presentation from './components/Presentation';
+import SystemOverview from './components/SystemOverview';
 
 // Lazy load heavy components for better performance
 const InteractiveDashboard = lazy(() => import('./components/InteractiveDashboard'));
@@ -77,6 +78,7 @@ export default function App() {
         <LoginScreen />
         <AboutUs />
         <Overview />
+        <SystemOverview />
         <Timeline />
         <DigitalCardSystem />
         <AttendanceSystem />
