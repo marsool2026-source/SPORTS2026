@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { PlatformDetector, SafeAPI } from '../utils/compatibility';
 
 interface Stat {
   label: string;
@@ -20,8 +21,19 @@ const stats: Stat[] = [
 function AnimatedCounter({ target, duration = 2000 }: { target: number; duration?: number }) {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    // استخدام SafeAPI مع fallback
+    if (!PlatformDetector.supportsIntersectionObserver()) {
+      // Fallback: افترض أن العنصر مرئي
+      setIsVisible(true);
+      return;
+    }
+
+    const element = elementRef.current;
+    if (!element) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -31,11 +43,7 @@ function AnimatedCounter({ target, duration = 2000 }: { target: number; duration
       { threshold: 0.5 }
     );
 
-    const element = document.getElementById(`counter-${target}`);
-    if (element) {
-      observer.observe(element);
-    }
-
+    observer.observe(element);
     return () => observer.disconnect();
   }, [target]);
 
@@ -43,6 +51,8 @@ function AnimatedCounter({ target, duration = 2000 }: { target: number; duration
     if (!isVisible) return;
 
     let startTime: number;
+    let animationId: number;
+
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
@@ -52,14 +62,20 @@ function AnimatedCounter({ target, duration = 2000 }: { target: number; duration
       setCount(Math.floor(easeOutQuart * target));
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationId = SafeAPI.requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
+    animationId = SafeAPI.requestAnimationFrame(animate);
+    
+    return () => {
+      if (animationId) {
+        SafeAPI.cancelAnimationFrame(animationId);
+      }
+    };
   }, [isVisible, target, duration]);
 
-  return <span id={`counter-${target}`}>{count}</span>;
+  return <span ref={elementRef} id={`counter-${target}`}>{count}</span>;
 }
 
 export default function LiveStats() {

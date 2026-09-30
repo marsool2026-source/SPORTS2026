@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
+import { StorageManager } from '../utils/compatibility';
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem('cookie-consent');
+    const consent = StorageManager.getItem('cookie-consent');
     if (!consent) {
       setTimeout(() => setVisible(true), 2000);
     }
   }, []);
 
   const accept = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
+    StorageManager.setItem('cookie-consent', 'accepted');
     setVisible(false);
   };
 
   const decline = () => {
-    localStorage.setItem('cookie-consent', 'declined');
+    StorageManager.setItem('cookie-consent', 'declined');
     setVisible(false);
   };
 

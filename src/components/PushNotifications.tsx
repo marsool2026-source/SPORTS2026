@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { NotificationManager, PlatformDetector } from '../utils/compatibility';
 
-interface Notification {
+interface AppNotification {
   id: number;
   title: string;
   message: string;
@@ -12,26 +13,29 @@ interface Notification {
 
 export default function PushNotifications() {
   const [permission, setPermission] = useState<NotificationPermission>('default');
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [showDemo, setShowDemo] = useState(false);
 
   useEffect(() => {
-    if ('Notification' in window) {
-      setPermission(Notification.permission);
+    if (PlatformDetector.supportsNotifications()) {
+      setPermission(NotificationManager.getPermission());
     }
   }, []);
 
   const requestPermission = async () => {
-    if ('Notification' in window) {
-      const result = await Notification.requestPermission();
+    if (PlatformDetector.supportsNotifications()) {
+      const result = await NotificationManager.requestPermission();
       setPermission(result);
       if (result === 'granted') {
         showNotification('تم التفعيل!', 'ستصلك الإشعارات الآن', 'system');
       }
+    } else {
+      // Fallback: عرض رسالة للمستخدم
+      alert('الإشعارات غير مدعومة على هذا الجهاز');
     }
   };
 
-  const showNotification = (title: string, message: string, type: Notification['type']) => {
+  const showNotification = (title: string, message: string, type: AppNotification['type']) => {
     const icons = {
       training: '⚽',
       payment: '💰',
@@ -39,7 +43,7 @@ export default function PushNotifications() {
       system: '🔔'
     };
 
-    const newNotification: Notification = {
+    const newNotification: AppNotification = {
       id: Date.now(),
       title,
       message,
@@ -51,8 +55,9 @@ export default function PushNotifications() {
 
     setNotifications(prev => [newNotification, ...prev]);
 
-    if (permission === 'granted') {
-      new window.Notification(title, {
+    // استخدام NotificationManager الآمن
+    if (permission === 'granted' && PlatformDetector.supportsNotifications()) {
+      NotificationManager.show(title, {
         body: message,
         icon: '/favicon.ico',
         badge: '/favicon.ico'

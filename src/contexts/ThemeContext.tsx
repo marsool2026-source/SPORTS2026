@@ -130,24 +130,32 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+import { StorageManager } from '../utils/compatibility';
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(themes[0]);
   const [mode, setMode] = useState<ThemeMode>(() => {
-    const saved = localStorage.getItem('theme-mode');
+    const saved = StorageManager.getItem('theme-mode');
     return (saved as ThemeMode) || 'dark';
   });
 
   useEffect(() => {
     // Apply theme to document
-    document.documentElement.style.setProperty('--theme-gradient', theme.preview);
-    document.documentElement.style.setProperty('--theme-glow', theme.glowColor);
-    localStorage.setItem('theme-mode', mode);
+    if (typeof document !== 'undefined') {
+      document.documentElement.style.setProperty('--theme-gradient', theme.preview);
+      document.documentElement.style.setProperty('--theme-glow', theme.glowColor);
+    }
+    
+    // Save mode safely
+    StorageManager.setItem('theme-mode', mode);
     
     // Apply mode
-    if (mode === 'light') {
-      document.documentElement.classList.add('light-mode');
-    } else {
-      document.documentElement.classList.remove('light-mode');
+    if (typeof document !== 'undefined') {
+      if (mode === 'light') {
+        document.documentElement.classList.add('light-mode');
+      } else {
+        document.documentElement.classList.remove('light-mode');
+      }
     }
   }, [theme, mode]);
 
