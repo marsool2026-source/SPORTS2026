@@ -37,6 +37,12 @@ import FAQ from './components/FAQ';
 import { CookieConsent, LegalPages } from './components/LegalPages';
 import { BackToTop, LoadingScreen } from './components/UIElements';
 import { PackageComparison, UpcomingEvents } from './components/AdditionalFeatures';
+import WorldRecordsSystem from './components/WorldRecordsSystem';
+import AIAnalysis from './components/AIAnalysis';
+import LiveStreaming from './components/LiveStreaming';
+import ReferralSystem from './components/ReferralSystem';
+import CouponSystem from './components/CouponSystem';
+import InvoiceSystem from './components/InvoiceSystem';
 
 // Lazy load heavy components for better performance
 const InteractiveDashboard = lazy(() => import('./components/InteractiveDashboard'));
@@ -86,6 +92,12 @@ export default function App() {
         <GallerySection />
         <LiveStats />
         <PackageQuiz />
+        <WorldRecordsSystem />
+        <AIAnalysis />
+        <LiveStreaming />
+        <ReferralSystem />
+        <CouponSystem />
+        <InvoiceSystem />
         <BMICalculator />
         <FreeTrialBooking />
         <ContactMap />
