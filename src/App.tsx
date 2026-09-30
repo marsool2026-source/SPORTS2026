@@ -1,7 +1,9 @@
+import { lazy, Suspense } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import ProgressBar from './components/ProgressBar';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import HeroVideo from './components/HeroVideo';
 import DesignPreview from './components/DesignPreview';
 import ThemeSelector from './components/ThemeSelector';
 import LoginScreen from './components/LoginScreen';
@@ -35,8 +37,24 @@ import FAQ from './components/FAQ';
 import { CookieConsent, LegalPages } from './components/LegalPages';
 import { BackToTop, LoadingScreen } from './components/UIElements';
 import { PackageComparison, UpcomingEvents } from './components/AdditionalFeatures';
-import CallToAction from './components/CallToAction';
-import Footer from './components/Footer';
+
+// Lazy load heavy components for better performance
+const InteractiveDashboard = lazy(() => import('./components/InteractiveDashboard'));
+const FieldBooking = lazy(() => import('./components/FieldBooking'));
+const RewardsSystem = lazy(() => import('./components/RewardsSystem'));
+const PushNotifications = lazy(() => import('./components/PushNotifications'));
+const CallToAction = lazy(() => import('./components/CallToAction'));
+const Footer = lazy(() => import('./components/Footer'));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center py-20">
+    <div className="text-center">
+      <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+      <p className="text-gray-400 text-sm">جاري التحميل...</p>
+    </div>
+  </div>
+);
 
 export default function App() {
   return (
@@ -45,6 +63,7 @@ export default function App() {
         <LoadingScreen />
         <ProgressBar />
         <Navigation />
+        <HeroVideo />
         <Hero />
         <DesignPreview />
         <ThemeSelector />
@@ -80,8 +99,14 @@ export default function App() {
         <Summary />
         <FAQ />
         <LegalPages />
-        <CallToAction />
-        <Footer />
+        <Suspense fallback={<LoadingFallback />}>
+          <InteractiveDashboard />
+          <FieldBooking />
+          <RewardsSystem />
+          <PushNotifications />
+          <CallToAction />
+          <Footer />
+        </Suspense>
         <BackToTop />
         <CookieConsent />
       </div>
