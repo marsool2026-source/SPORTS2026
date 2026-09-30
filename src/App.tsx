@@ -10,6 +10,10 @@ import BackupSystem from './components/BackupSystem';
 import AdvancedAnalytics from './components/AdvancedAnalytics';
 import PublicAPI from './components/PublicAPI';
 import MultiLanguage, { LanguageProvider, useLanguage } from './components/MultiLanguage';
+import QRAttendanceSystem from './components/QRAttendanceSystem';
+import { ARTraining, BlockchainCertificates, IoTDevices, FaceRecognition } from './components/AdvancedFeatures1';
+import { FacilityBooking, ReviewsSystem, AdvancedSearch, SmartRecommendations } from './components/AdvancedFeatures2';
+import { AffiliateMarketing, ECertificates, NewsBlog, Surveys, AdvancedLiveStream, PredictiveAnalytics, AdvancedCustomization } from './components/AdvancedFeatures3';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -69,12 +73,28 @@ function Header() {
     { id: 'players', label: 'اللاعبين', icon: '👥' },
     { id: 'coaches', label: 'المدربين', icon: '👨‍🏫' },
     { id: 'finance', label: 'المالية', icon: '💰' },
+    { id: 'qr-attendance', label: 'الحضور QR', icon: '📱' },
     { id: 'loyalty', label: 'الولاء', icon: '🏆' },
     { id: 'chatbot', label: 'المساعد', icon: '🤖' },
     { id: 'analytics', label: 'التحليلات', icon: '📊' },
     { id: 'backup', label: 'النسخ', icon: '💾' },
     { id: 'api', label: 'API', icon: '🔌' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
+    { id: 'ar', label: 'AR', icon: '🥽' },
+    { id: 'blockchain', label: 'الشهادات', icon: '🔗' },
+    { id: 'iot', label: 'IoT', icon: '📡' },
+    { id: 'face', label: 'الوجه', icon: '👤' },
+    { id: 'facility', label: 'المرافق', icon: '🏟️' },
+    { id: 'reviews', label: 'التقييمات', icon: '⭐' },
+    { id: 'search', label: 'البحث', icon: '🔍' },
+    { id: 'recommend', label: 'التوصيات', icon: '🎯' },
+    { id: 'affiliate', label: 'العمولة', icon: '🤝' },
+    { id: 'certificates', label: 'الشهادات', icon: '🏅' },
+    { id: 'news', label: 'الأخبار', icon: '📰' },
+    { id: 'surveys', label: 'الاستطلاعات', icon: '📊' },
+    { id: 'stream', label: 'البث', icon: '📹' },
+    { id: 'predictive', label: 'التنبؤ', icon: '📈' },
+    { id: 'customize', label: 'التخصيص', icon: '🎨' },
   ];
 
   return (
@@ -328,12 +348,28 @@ function AppContent() {
       case 'players': return <PlayersSection />;
       case 'coaches': return <CoachesSection />;
       case 'finance': return <FinanceSection />;
+      case 'qr-attendance': return <QRAttendanceSystem />;
       case 'loyalty': return <AdvancedLoyalty />;
       case 'chatbot': return <ChatbotAI />;
       case 'analytics': return <AdvancedAnalytics />;
       case 'backup': return <BackupSystem />;
       case 'api': return <PublicAPI />;
       case 'language': return <MultiLanguage />;
+      case 'ar': return <ARTraining />;
+      case 'blockchain': return <BlockchainCertificates />;
+      case 'iot': return <IoTDevices />;
+      case 'face': return <FaceRecognition />;
+      case 'facility': return <FacilityBooking />;
+      case 'reviews': return <ReviewsSystem />;
+      case 'search': return <AdvancedSearch />;
+      case 'recommend': return <SmartRecommendations />;
+      case 'affiliate': return <AffiliateMarketing />;
+      case 'certificates': return <ECertificates />;
+      case 'news': return <NewsBlog />;
+      case 'surveys': return <Surveys />;
+      case 'stream': return <AdvancedLiveStream />;
+      case 'predictive': return <PredictiveAnalytics />;
+      case 'customize': return <AdvancedCustomization />;
       default: return <Dashboard />;
     }
   };
@@ -347,9 +383,9 @@ function AppContent() {
       <footer className="bg-white/5 backdrop-blur-lg border-t border-white/10 p-8 mt-12">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400 mb-2">صُنع بـ ❤️ بواسطة فريق Sports Academy</p>
-          <p className="text-gray-500 text-sm">الإصدار 6.0.0 - النسخة النهائية الكاملة</p>
-          <div className="flex justify-center gap-2 mt-4">
-            {['56+ مكون', '10 أنظمة جديدة', '4 لغات', 'API عام'].map((item, i) => (
+          <p className="text-gray-500 text-sm">الإصدار 7.0.0 - النسخة النهائية الكاملة مع 15 ميزة جديدة</p>
+          <div className="flex flex-wrap justify-center gap-2 mt-4">
+            {['77+ مكون', '32 نظام', '4 لغات', 'API عام', 'AR/VR', 'Blockchain', 'IoT', 'AI'].map((item, i) => (
               <span key={i} className="px-2 py-1 bg-white/5 rounded text-xs text-gray-400">{item}</span>
             ))}
           </div>
