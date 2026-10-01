@@ -16,6 +16,8 @@ import { ECertificates, NewsBlog, Surveys, AdvancedLiveStream, PredictiveAnalyti
 import { GamificationSystem, VideoAnalysisAI, NFTCertificates, MultiBranchSystem, BigDataAnalytics } from './components/AdvancedFeatures4';
 import { APIIntegration, SocialMediaIntegration, AutoContentCreation, AutomationSystem, PersonalizedML } from './components/AdvancedFeatures5';
 import { PredictionSystem, InteractiveMaps, AdvancedMultiLanguage, AdvancedSubscriptions, GiftsAndDonations } from './components/AdvancedFeatures6';
+import { MetaverseSystem, AICoach, AdvancedPaymentSystem } from './components/AdvancedFeatures7';
+import { IntegrationTestSystem, SystemMonitoring } from './components/IntegrationTestSystem';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -109,6 +111,11 @@ function Header() {
     { id: 'multilang', label: 'لغات', icon: '🌐' },
     { id: 'subscriptions', label: 'اشتراكات', icon: '💎' },
     { id: 'gifts', label: 'هدايا', icon: '🎁' },
+    { id: 'metaverse', label: 'ميتافيرس', icon: '🌐' },
+    { id: 'ai-coach', label: 'مدرب AI', icon: '🤖' },
+    { id: 'payment', label: 'دفع', icon: '💳' },
+    { id: 'integration-test', label: 'اختبار', icon: '🧪' },
+    { id: 'monitoring', label: 'مراقبة', icon: '📊' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
   ];
 
@@ -397,6 +404,11 @@ function AppContent() {
       case 'multilang': return <AdvancedMultiLanguage />;
       case 'subscriptions': return <AdvancedSubscriptions />;
       case 'gifts': return <GiftsAndDonations />;
+      case 'metaverse': return <MetaverseSystem />;
+      case 'ai-coach': return <AICoach />;
+      case 'payment': return <AdvancedPaymentSystem />;
+      case 'integration-test': return <IntegrationTestSystem />;
+      case 'monitoring': return <SystemMonitoring />;
       case 'language': return <MultiLanguage />;
       default: return <Dashboard />;
     }
