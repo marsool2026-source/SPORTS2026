@@ -20,6 +20,8 @@ import { MetaverseSystem, AICoach, AdvancedPaymentSystem } from './components/Ad
 import { IntegrationTestSystem, SystemMonitoring } from './components/IntegrationTestSystem';
 import { CRMSystem, InventorySystem, AdvancedFinancialReports, EmployeeManagement } from './components/AdvancedFeatures8';
 import { InterAcademyCompetitions, PodcastSystem, PartnershipsSystem } from './components/AdvancedFeatures9';
+import UserPages from './components/UserPages';
+import ProfessionalQRCode from './components/ProfessionalQRCode';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -125,6 +127,8 @@ function Header() {
     { id: 'competitions', label: 'مسابقات', icon: '🏆' },
     { id: 'podcast', label: 'بودكاست', icon: '🎙️' },
     { id: 'partnerships', label: 'شراكات', icon: '🤝' },
+    { id: 'user-pages', label: 'صفحات المستخدم', icon: '📱' },
+    { id: 'qr-code', label: 'QR Code', icon: '📱' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
   ];
 
@@ -425,6 +429,8 @@ function AppContent() {
       case 'competitions': return <InterAcademyCompetitions />;
       case 'podcast': return <PodcastSystem />;
       case 'partnerships': return <PartnershipsSystem />;
+      case 'user-pages': return <UserPages />;
+      case 'qr-code': return <ProfessionalQRCode />;
       case 'language': return <MultiLanguage />;
       default: return <Dashboard />;
     }
