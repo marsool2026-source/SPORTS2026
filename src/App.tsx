@@ -13,6 +13,9 @@ import MultiLanguage, { LanguageProvider, useLanguage } from './components/Multi
 import { ARTraining, BlockchainCertificates, IoTDevices, FaceRecognition } from './components/AdvancedFeatures1';
 import { FacilityBooking, ReviewsRatings, AdvancedSearch, SmartRecommendations, AffiliateMarketing } from './components/AdvancedFeatures2';
 import { ECertificates, NewsBlog, Surveys, AdvancedLiveStream, PredictiveAnalytics, AdvancedCustomization } from './components/AdvancedFeatures3';
+import { GamificationSystem, VideoAnalysisAI, NFTCertificates, MultiBranchSystem, BigDataAnalytics } from './components/AdvancedFeatures4';
+import { APIIntegration, SocialMediaIntegration, AutoContentCreation, AutomationSystem, PersonalizedML } from './components/AdvancedFeatures5';
+import { PredictionSystem, InteractiveMaps, AdvancedMultiLanguage, AdvancedSubscriptions, GiftsAndDonations } from './components/AdvancedFeatures6';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -92,6 +95,20 @@ function Header() {
     { id: 'livestream', label: 'البث', icon: '📱' },
     { id: 'predictions', label: 'التنبؤات', icon: '📈' },
     { id: 'customize', label: 'التخصيص', icon: '🎨' },
+    { id: 'gamification', label: 'الألعاب', icon: '🎮' },
+    { id: 'video-ai', label: 'تحليل فيديو', icon: '🤖' },
+    { id: 'nft', label: 'NFT', icon: '🔗' },
+    { id: 'branches', label: 'الفروع', icon: '🌍' },
+    { id: 'bigdata', label: 'Big Data', icon: '📊' },
+    { id: 'api-integration', label: 'API', icon: '🔌' },
+    { id: 'social', label: 'سوشيال', icon: '📱' },
+    { id: 'auto-content', label: 'محتوى AI', icon: '🎥' },
+    { id: 'automation', label: 'أتمتة', icon: '⚙️' },
+    { id: 'ml', label: 'تعلم آلي', icon: '🧠' },
+    { id: 'maps', label: 'خرائط', icon: '🗺️' },
+    { id: 'multilang', label: 'لغات', icon: '🌐' },
+    { id: 'subscriptions', label: 'اشتراكات', icon: '💎' },
+    { id: 'gifts', label: 'هدايا', icon: '🎁' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
   ];
 
@@ -366,6 +383,20 @@ function AppContent() {
       case 'livestream': return <AdvancedLiveStream />;
       case 'predictions': return <PredictiveAnalytics />;
       case 'customize': return <AdvancedCustomization />;
+      case 'gamification': return <GamificationSystem />;
+      case 'video-ai': return <VideoAnalysisAI />;
+      case 'nft': return <NFTCertificates />;
+      case 'branches': return <MultiBranchSystem />;
+      case 'bigdata': return <BigDataAnalytics />;
+      case 'api-integration': return <APIIntegration />;
+      case 'social': return <SocialMediaIntegration />;
+      case 'auto-content': return <AutoContentCreation />;
+      case 'automation': return <AutomationSystem />;
+      case 'ml': return <PersonalizedML />;
+      case 'maps': return <InteractiveMaps />;
+      case 'multilang': return <AdvancedMultiLanguage />;
+      case 'subscriptions': return <AdvancedSubscriptions />;
+      case 'gifts': return <GiftsAndDonations />;
       case 'language': return <MultiLanguage />;
       default: return <Dashboard />;
     }

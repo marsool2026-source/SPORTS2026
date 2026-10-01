@@ -1,140 +1,231 @@
 import { useState } from 'react';
 
 // ============================================
-// 🧠 نظام الذكاء العاطفي
+// 🎮 نظام Gamification المتقدم
 // ============================================
+export function GamificationSystem() {
+  const [playerXP] = useState(2750);
+  const [level] = useState(15);
+  const [streak] = useState(7);
 
-export function EmotionalAI() {
-  const [mood, setMood] = useState<string>('');
-  const moods = [
-    { emoji: '😊', label: 'سعيد', color: 'from-yellow-400 to-orange-500' },
-    { emoji: '😐', label: 'عادي', color: 'from-gray-400 to-gray-500' },
-    { emoji: '😔', label: 'حزين', color: 'from-blue-400 to-blue-600' },
-    { emoji: '😤', label: 'غاضب', color: 'from-red-400 to-red-600' },
-    { emoji: '😰', label: 'قلق', color: 'from-purple-400 to-purple-600' },
-    { emoji: '😴', label: 'متعب', color: 'from-indigo-400 to-indigo-600' },
+  const badges = [
+    { id: 1, name: 'بطل الأسبوع', icon: '🏆', rarity: 'legendary', earned: true },
+    { id: 2, name: 'سريع البرق', icon: '⚡', rarity: 'epic', earned: true },
+    { id: 3, name: 'حارس مرمى', icon: '🧤', rarity: 'rare', earned: true },
+    { id: 4, name: 'هداف', icon: '🎯', rarity: 'epic', earned: false },
+    { id: 5, name: 'قائد الفريق', icon: '👑', rarity: 'legendary', earned: false },
+    { id: 6, name: 'مبتدئ', icon: '🌟', rarity: 'common', earned: true },
   ];
 
-  const recommendations = {
-    'سعيد': ['حافظ على هذا المزاج!', 'شارك فرحتك مع الفريق', 'استغل طاقتك في التدريب'],
-    'عادي': ['جرب تمارين التنفس', 'استمع لموسيقى تحفيزية', 'تحدث مع مدربك'],
-    'حزين': ['تحدث مع شخص تثق به', 'مارس رياضة خفيفة', 'خذ وقتاً لنفسك'],
-    'غاضب': ['مارس تمارين التنفس العميق', 'اذهب للمشي', 'اكتب ما تشعر به'],
-    'قلق': ['مارس التأمل', 'تنفس بعمق', 'تحدث مع مختص'],
-    'متعب': ['خذ قسطاً من الراحة', 'اشرب ماءً كثيراً', 'نم مبكراً الليلة'],
+  const dailyQuests = [
+    { id: 1, title: 'حضور 3 حصص', progress: 2, target: 3, xp: 100, icon: '📅' },
+    { id: 2, title: 'تسجيل 5 أهداف', progress: 3, target: 5, xp: 150, icon: '⚽' },
+    { id: 3, title: 'مساعدة زميل', progress: 1, target: 1, xp: 75, icon: '🤝' },
+  ];
+
+  const getRarityColor = (rarity: string) => {
+    const colors: Record<string, string> = {
+      common: 'from-gray-400 to-gray-500',
+      rare: 'from-blue-400 to-blue-600',
+      epic: 'from-purple-400 to-purple-600',
+      legendary: 'from-amber-400 to-orange-600',
+    };
+    return colors[rarity] || colors.common;
   };
 
   return (
-    <section id="emotional-ai" className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
+    <section id="gamification" className="py-20 px-4">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" />
+            <span className="text-pink-300 text-xs font-semibold">Gamification</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🧠 الذكاء العاطفي
+            🎮 نظام <span className="gradient-text">الألعاب</span>
           </h2>
-          <p className="text-gray-400">تحليل مشاعرك وتقديم توصيات مخصصة</p>
+          <p className="text-gray-400">اكسب النقاط وارتقِ بالمستويات واحصل على شارات</p>
         </div>
 
-        <div className="glass-card p-6 mb-6">
-          <h3 className="text-white font-bold text-lg mb-4">كيف تشعر اليوم؟</h3>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-            {moods.map((m) => (
-              <button
-                key={m.label}
-                onClick={() => setMood(m.label)}
-                className={`p-4 rounded-xl transition-all hover:scale-110 ${
-                  mood === m.label
-                    ? `bg-gradient-to-br ${m.color} ring-2 ring-white`
-                    : 'glass-card-light'
-                }`}
-              >
-                <div className="text-4xl mb-2">{m.emoji}</div>
-                <div className="text-white text-xs font-bold">{m.label}</div>
-              </button>
+        {/* Player Stats */}
+        <div className="glass-card p-6 mb-8">
+          <div className="flex items-center gap-6 mb-4">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center text-4xl shadow-lg">
+              🎮
+            </div>
+            <div className="flex-1">
+              <div className="text-gray-400 text-sm">المستوى الحالي</div>
+              <div className="text-white font-bold text-2xl">المستوى {level}</div>
+              <div className="flex items-center gap-3 mt-2">
+                <div className="flex-1 h-3 bg-gray-700 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-l from-pink-500 to-purple-600" style={{ width: '75%' }} />
+                </div>
+                <span className="text-pink-400 font-bold text-sm">{playerXP}/3500 XP</span>
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl">🔥</div>
+              <div className="text-orange-400 font-bold">{streak} أيام</div>
+              <div className="text-gray-400 text-xs">سلسلة</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Badges */}
+        <div className="glass-card p-6 mb-8">
+          <h3 className="text-white font-bold text-lg mb-4">🏅 الشارات والإنجازات</h3>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+            {badges.map((badge) => (
+              <div key={badge.id} className={`text-center p-3 rounded-xl ${badge.earned ? '' : 'opacity-40'}`}>
+                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${getRarityColor(badge.rarity)} flex items-center justify-center text-3xl mx-auto mb-2 shadow-lg ${badge.earned ? '' : 'grayscale'}`}>
+                  {badge.icon}
+                </div>
+                <div className="text-white text-xs font-bold">{badge.name}</div>
+                <div className={`text-[10px] mt-1 ${
+                  badge.rarity === 'legendary' ? 'text-amber-400' :
+                  badge.rarity === 'epic' ? 'text-purple-400' :
+                  badge.rarity === 'rare' ? 'text-blue-400' : 'text-gray-400'
+                }`}>
+                  {badge.rarity === 'legendary' ? 'أسطوري' : badge.rarity === 'epic' ? 'ملحمي' : badge.rarity === 'rare' ? 'نادر' : 'عادي'}
+                </div>
+              </div>
             ))}
           </div>
         </div>
 
-        {mood && (
-          <div className="glass-card p-6">
-            <h3 className="text-white font-bold text-lg mb-4">💡 توصيات مخصصة لك</h3>
-            <div className="space-y-3">
-              {recommendations[mood as keyof typeof recommendations]?.map((rec, i) => (
-                <div key={i} className="glass-card-light p-4 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold">
-                    {i + 1}
+        {/* Daily Quests */}
+        <div className="glass-card p-6">
+          <h3 className="text-white font-bold text-lg mb-4">📋 المهام اليومية</h3>
+          <div className="space-y-3">
+            {dailyQuests.map((quest) => (
+              <div key={quest.id} className="glass-card-light p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-2xl">{quest.icon}</span>
+                  <div className="flex-1">
+                    <div className="text-white font-bold text-sm">{quest.title}</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <div className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full ${quest.progress >= quest.target ? 'bg-emerald-500' : 'bg-gradient-to-l from-pink-500 to-purple-600'}`}
+                          style={{ width: `${(quest.progress / quest.target) * 100}%` }}
+                        />
+                      </div>
+                      <span className="text-gray-400 text-xs">{quest.progress}/{quest.target}</span>
+                    </div>
                   </div>
-                  <div className="text-white">{rec}</div>
+                  <div className="text-pink-400 font-bold text-sm">+{quest.xp} XP</div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
 }
 
 // ============================================
-// 💬 نظام الدردشة الصوتية
+// 🤖 نظام تحليل الفيديو بالذكاء الاصطناعي
 // ============================================
+export function VideoAnalysisAI() {
+  const [analyzing, setAnalyzing] = useState(false);
+  const [analysisComplete, setAnalysisComplete] = useState(false);
 
-export function VoiceChat() {
-  const [isRecording, setIsRecording] = useState(false);
-  const rooms = [
-    { id: 1, name: 'غرفة المدربين', participants: 5, status: 'active', icon: '👨‍🏫' },
-    { id: 2, name: 'غرفة اللاعبين', participants: 12, status: 'active', icon: '⚽' },
-    { id: 3, name: 'غرفة أولياء الأمور', participants: 8, status: 'active', icon: '👨‍👩‍👧' },
-    { id: 4, name: 'جلسة أسئلة وأجوبة', participants: 15, status: 'live', icon: '❓' },
+  const startAnalysis = () => {
+    setAnalyzing(true);
+    setAnalysisComplete(false);
+    setTimeout(() => {
+      setAnalyzing(false);
+      setAnalysisComplete(true);
+    }, 3000);
+  };
+
+  const analysisResults = [
+    { metric: 'دقة التسديد', score: 87, improvement: '+5%', icon: '🎯' },
+    { metric: 'سرعة الجري', score: 92, improvement: '+3%', icon: '⚡' },
+    { metric: 'التمرير', score: 78, improvement: '+8%', icon: '🔄' },
+    { metric: 'التمركز', score: 85, improvement: '+2%', icon: '📍' },
+    { metric: 'القوة البدنية', score: 80, improvement: '+4%', icon: '💪' },
   ];
 
   return (
-    <section id="voice-chat" className="py-20 px-4">
+    <section id="video-analysis" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+            <span className="text-cyan-300 text-xs font-semibold">AI Analysis</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            💬 الدردشة الصوتية
+            🤖 تحليل الفيديو بالذكاء الاصطناعي
           </h2>
-          <p className="text-gray-400">غرف دردشة صوتية مباشرة</p>
+          <p className="text-gray-400">تحليل تلقائي لفيديوهات التدريب واكتشاف الأخطاء</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {rooms.map((room) => (
-            <div key={room.id} className="glass-card p-6 hover:scale-105 transition-transform">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl">
-                  {room.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{room.name}</h3>
-                  <div className="flex items-center gap-2 text-sm text-gray-400">
-                    <span>👥 {room.participants} مشارك</span>
-                    {room.status === 'live' && (
-                      <span className="px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">LIVE</span>
-                    )}
+          {/* Video Upload */}
+          <div className="glass-card p-6">
+            <h3 className="text-white font-bold text-lg mb-4">📹 رفع الفيديو</h3>
+            <div className="aspect-video bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-xl flex items-center justify-center relative overflow-hidden mb-4">
+              {analyzing ? (
+                <div className="text-center">
+                  <div className="text-6xl mb-4 animate-pulse">🔍</div>
+                  <div className="text-white font-bold">جاري التحليل...</div>
+                  <div className="mt-4 w-48 h-2 bg-gray-700 rounded-full overflow-hidden mx-auto">
+                    <div className="h-full bg-gradient-to-l from-cyan-500 to-blue-600 animate-pulse" style={{ width: '70%' }} />
                   </div>
                 </div>
-              </div>
-              <button className="w-full py-3 bg-gradient-to-l from-blue-500 to-purple-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-                🎙️ انضم للغرفة
-              </button>
+              ) : analysisComplete ? (
+                <div className="text-center">
+                  <div className="text-6xl mb-4">✅</div>
+                  <div className="text-emerald-400 font-bold">اكتمل التحليل!</div>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <div className="text-6xl mb-4 opacity-50">📹</div>
+                  <div className="text-gray-400">اضغط لرفع فيديو</div>
+                </div>
+              )}
             </div>
-          ))}
-        </div>
+            <button
+              onClick={startAnalysis}
+              disabled={analyzing}
+              className="w-full py-3 bg-gradient-to-l from-cyan-500 to-blue-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+            >
+              {analyzing ? '🔍 جاري التحليل...' : '🤖 بدء التحليل بالذكاء الاصطناعي'}
+            </button>
+          </div>
 
-        <div className="mt-8 glass-card p-6 text-center">
-          <button
-            onClick={() => setIsRecording(!isRecording)}
-            className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center text-4xl transition-all ${
-              isRecording
-                ? 'bg-red-500 animate-pulse'
-                : 'bg-gradient-to-br from-blue-500 to-purple-600 hover:scale-110'
-            }`}
-          >
-            {isRecording ? '⏹️' : '🎤'}
-          </button>
-          <p className="text-white mt-4 font-bold">
-            {isRecording ? 'جاري التسجيل... اضغط للإيقاف' : 'اضغط لبدء التسجيل'}
-          </p>
+          {/* Analysis Results */}
+          <div className="glass-card p-6">
+            <h3 className="text-white font-bold text-lg mb-4">📊 نتائج التحليل</h3>
+            {analysisComplete ? (
+              <div className="space-y-3">
+                {analysisResults.map((result, i) => (
+                  <div key={i} className="glass-card-light p-3">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-2xl">{result.icon}</span>
+                      <div className="flex-1">
+                        <div className="text-white font-bold text-sm">{result.metric}</div>
+                        <div className="flex items-center gap-2 mt-1">
+                          <div className="flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div className="h-full bg-gradient-to-l from-cyan-500 to-blue-600" style={{ width: `${result.score}%` }} />
+                          </div>
+                          <span className="text-cyan-400 font-bold text-sm">{result.score}%</span>
+                        </div>
+                      </div>
+                      <span className="text-emerald-400 text-xs font-bold">{result.improvement}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4 opacity-50">📊</div>
+                <p className="text-gray-400">ابدأ التحليل لعرض النتائج</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
@@ -142,97 +233,62 @@ export function VoiceChat() {
 }
 
 // ============================================
-// 👥 نظام المجموعات الاجتماعية
+// 🔗 نظام NFT للشهادات
 // ============================================
-
-export function SocialGroups() {
-  const groups = [
-    { id: 1, name: 'فريق كرة القدم', members: 45, icon: '⚽', category: 'رياضة' },
-    { id: 2, name: 'مجموعة اللياقة', members: 32, icon: '💪', category: 'صحة' },
-    { id: 3, name: 'نادي السباحة', members: 28, icon: '🏊', category: 'رياضة' },
-    { id: 4, name: 'مجموعة التغذية', members: 56, icon: '🥗', category: 'صحة' },
-    { id: 5, name: 'فريق البطولات', members: 38, icon: '🏆', category: 'منافسات' },
-    { id: 6, name: 'مجموعة الدعم النفسي', members: 24, icon: '🧠', category: 'دعم' },
+export function NFTCertificates() {
+  const nfts = [
+    { id: 1, name: 'شهادة بطل المنطقة', tokenId: '#0001', owner: 'أحمد محمد', price: '2.5 ETH', rarity: 'Legendary', image: '🏆' },
+    { id: 2, name: 'شارة الهداف', tokenId: '#0042', owner: 'محمد خالد', price: '1.2 ETH', rarity: 'Epic', image: '⚽' },
+    { id: 3, name: 'شهادة اللياقة', tokenId: '#0108', owner: 'يوسف أحمد', price: '0.8 ETH', rarity: 'Rare', image: '💪' },
+    { id: 4, name: 'نجمة الصعود', tokenId: '#0256', owner: 'عمر طارق', price: '0.5 ETH', rarity: 'Common', image: '⭐' },
   ];
 
   return (
-    <section id="social-groups" className="py-20 px-4">
+    <section id="nft-certificates" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+            <span className="text-purple-300 text-xs font-semibold">NFT</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            👥 المجموعات الاجتماعية
+            🔗 شهادات NFT الرقمية
           </h2>
-          <p className="text-gray-400">انضم لمجموعات حسب اهتماماتك</p>
+          <p className="text-gray-400">شهادات وإنجازات رقمية فريدة على Blockchain</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {groups.map((group) => (
-            <div key={group.id} className="glass-card p-6 hover:scale-105 transition-transform">
-              <div className="text-5xl mb-4 text-center">{group.icon}</div>
-              <h3 className="text-white font-bold text-lg mb-2 text-center">{group.name}</h3>
-              <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
-                <span>👥 {group.members} عضو</span>
-                <span className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded text-xs">{group.category}</span>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {nfts.map((nft) => (
+            <div key={nft.id} className="glass-card overflow-hidden hover:scale-105 transition-all cursor-pointer">
+              <div className={`aspect-square bg-gradient-to-br ${
+                nft.rarity === 'Legendary' ? 'from-amber-500/30 to-orange-600/30' :
+                nft.rarity === 'Epic' ? 'from-purple-500/30 to-violet-600/30' :
+                nft.rarity === 'Rare' ? 'from-blue-500/30 to-cyan-600/30' :
+                'from-gray-500/30 to-gray-600/30'
+              } flex items-center justify-center`}>
+                <div className="text-8xl">{nft.image}</div>
               </div>
-              <button className="w-full py-2 bg-gradient-to-l from-blue-500 to-purple-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-                انضم
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 🏆 نظام المسابقات والبطولات
-// ============================================
-
-export function Competitions() {
-  const competitions = [
-    { id: 1, name: 'بطولة السرعة الشهرية', participants: 32, prize: '1000 ج.م', status: 'ongoing', icon: '⚡' },
-    { id: 2, name: 'تحدي اللياقة الأسبوعي', participants: 48, prize: '500 ج.م', status: 'upcoming', icon: '💪' },
-    { id: 3, name: 'كأس الأكاديمية', participants: 64, prize: '2000 ج.م', status: 'upcoming', icon: '🏆' },
-    { id: 4, name: 'تحدي التسديد', participants: 24, prize: '750 ج.م', status: 'completed', icon: '🎯' },
-  ];
-
-  return (
-    <section id="competitions" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🏆 المسابقات والبطولات
-          </h2>
-          <p className="text-gray-400">شارك في تحديات مثيرة واربح جوائز</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {competitions.map((comp) => (
-            <div key={comp.id} className="glass-card p-6 hover:scale-105 transition-transform">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-3xl">
-                  {comp.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{comp.name}</h3>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
-                    <span>👥 {comp.participants} مشارك</span>
-                    <span>💰 {comp.prize}</span>
+              <div className="p-4">
+                <h3 className="text-white font-bold text-sm mb-1">{nft.name}</h3>
+                <div className="text-gray-400 text-xs mb-2">Token: {nft.tokenId}</div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-gray-400 text-[10px]">المالك</div>
+                    <div className="text-white text-xs">{nft.owner}</div>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-gray-400 text-[10px]">السعر</div>
+                    <div className="text-purple-400 text-xs font-bold">{nft.price}</div>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                  comp.status === 'ongoing' ? 'bg-emerald-500/20 text-emerald-300' :
-                  comp.status === 'upcoming' ? 'bg-blue-500/20 text-blue-300' :
+                <div className={`mt-2 px-2 py-1 rounded-full text-[10px] font-bold text-center ${
+                  nft.rarity === 'Legendary' ? 'bg-amber-500/20 text-amber-300' :
+                  nft.rarity === 'Epic' ? 'bg-purple-500/20 text-purple-300' :
+                  nft.rarity === 'Rare' ? 'bg-blue-500/20 text-blue-300' :
                   'bg-gray-500/20 text-gray-300'
                 }`}>
-                  {comp.status === 'ongoing' ? '🔴 جارية' : comp.status === 'upcoming' ? '⏰ قادمة' : '✓ مكتملة'}
-                </span>
-                <button className="px-4 py-2 bg-gradient-to-l from-amber-500 to-orange-600 text-white text-sm font-bold rounded-lg">
-                  سجل الآن
-                </button>
+                  {nft.rarity}
+                </div>
               </div>
             </div>
           ))}
@@ -243,321 +299,82 @@ export function Competitions() {
 }
 
 // ============================================
-// 🎬 نظام القصص (Stories)
+// 🌍 نظام تعدد الفروع
 // ============================================
-
-export function StoriesSystem() {
-  const stories = [
-    { id: 1, user: 'أحمد محمد', content: 'تدريب رائع اليوم! ⚽', time: 'منذ ساعتين', views: 234, icon: '⚽' },
-    { id: 2, user: 'كابتن محمود', content: 'استعدادات البطولة 🏆', time: 'منذ 3 ساعات', views: 456, icon: '🏆' },
-    { id: 3, user: 'محمد خالد', content: 'رقم قياسي جديد! 🎉', time: 'منذ 5 ساعات', views: 678, icon: '🎉' },
-    { id: 4, user: 'سارة علي', content: 'فريق رائع اليوم 💪', time: 'منذ 6 ساعات', views: 345, icon: '💪' },
+export function MultiBranchSystem() {
+  const branches = [
+    { id: 1, name: 'الفرع الرئيسي - القاهرة', manager: 'كابتن محمود', players: 120, coaches: 8, revenue: '45,000 ج.م', status: 'active', icon: '🏢' },
+    { id: 2, name: 'فرع الإسكندرية', manager: 'كابتن سارة', players: 85, coaches: 6, revenue: '32,000 ج.م', status: 'active', icon: '🏖️' },
+    { id: 3, name: 'فرع الجيزة', manager: 'كابتن أحمد', players: 95, coaches: 7, revenue: '38,000 ج.م', status: 'active', icon: '🏛️' },
+    { id: 4, name: 'فرع المنصورة', manager: 'كابتن محمد', players: 60, coaches: 4, revenue: '22,000 ج.م', status: 'active', icon: '🌳' },
   ];
 
   return (
-    <section id="stories" className="py-20 px-4">
+    <section id="multi-branch" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-emerald-300 text-xs font-semibold">فروع متعددة</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🎬 القصص
+            🌍 نظام الفروع المتعددة
           </h2>
-          <p className="text-gray-400">شارك لحظاتك مع المجتمع</p>
+          <p className="text-gray-400">إدارة مركزية لجميع فروع الأكاديمية</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {stories.map((story) => (
-            <div key={story.id} className="glass-card overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-              <div className="aspect-[9/16] bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center relative">
-                <div className="text-7xl">{story.icon}</div>
-                <div className="absolute top-3 left-3 right-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold">
-                      {story.user[0]}
-                    </div>
-                    <div className="text-white text-xs font-bold">{story.user}</div>
-                  </div>
-                </div>
-                <div className="absolute bottom-3 left-3 right-3">
-                  <p className="text-white text-sm mb-1">{story.content}</p>
-                  <div className="flex items-center justify-between text-xs text-gray-300">
-                    <span>{story.time}</span>
-                    <span>👁️ {story.views}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 text-center">
-          <button className="px-6 py-3 bg-gradient-to-l from-purple-500 to-pink-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-            📸 أضف قصة جديدة
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 🎓 نظام التدريب عن بعد
-// ============================================
-
-export function RemoteTraining() {
-  const courses = [
-    { id: 1, title: 'أساسيات كرة القدم', lessons: 12, duration: '6 ساعات', level: 'مبتدئ', icon: '⚽' },
-    { id: 2, title: 'التدريب المتقدم', lessons: 20, duration: '10 ساعات', level: 'متقدم', icon: '🏆' },
-    { id: 3, title: 'اللياقة البدنية', lessons: 15, duration: '8 ساعات', level: 'متوسط', icon: '💪' },
-    { id: 4, title: 'التغذية الرياضية', lessons: 10, duration: '5 ساعات', level: 'مبتدئ', icon: '🥗' },
-  ];
-
-  return (
-    <section id="remote-training" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🎓 التدريب عن بعد
-          </h2>
-          <p className="text-gray-400">دروس فيديو وجلسات مباشرة</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {courses.map((course) => (
-            <div key={course.id} className="glass-card p-6 hover:scale-105 transition-transform">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-3xl">
-                  {course.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{course.title}</h3>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
-                    <span>📚 {course.lessons} درس</span>
-                    <span>⏱️ {course.duration}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                  course.level === 'مبتدئ' ? 'bg-emerald-500/20 text-emerald-300' :
-                  course.level === 'متوسط' ? 'bg-amber-500/20 text-amber-300' :
-                  'bg-red-500/20 text-red-300'
-                }`}>
-                  {course.level}
-                </span>
-                <button className="px-4 py-2 bg-gradient-to-l from-blue-500 to-cyan-600 text-white text-sm font-bold rounded-lg">
-                  ابدأ الآن
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 🧠 نظام الصحة النفسية
-// ============================================
-
-export function MentalHealth() {
-  const exercises = [
-    { id: 1, title: 'تمارين التنفس', duration: '5 دقائق', icon: '🌬️', category: 'استرخاء' },
-    { id: 2, title: 'التأمل الموجه', duration: '10 دقائق', icon: '🧘', category: 'تأمل' },
-    { id: 3, title: 'إدارة الضغط', duration: '15 دقيقة', icon: '💆', category: 'إدارة' },
-    { id: 4, title: 'تمارين اليقظة', duration: '7 دقائق', icon: '👁️', category: 'يقظة' },
-  ];
-
-  return (
-    <section id="mental-health" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🧠 الصحة النفسية
-          </h2>
-          <p className="text-gray-400">تمارين تأمل وإدارة الضغط</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {exercises.map((exercise) => (
-            <div key={exercise.id} className="glass-card p-6 text-center hover:scale-105 transition-transform">
-              <div className="text-5xl mb-4">{exercise.icon}</div>
-              <h3 className="text-white font-bold text-lg mb-2">{exercise.title}</h3>
-              <div className="text-gray-400 text-sm mb-3">⏱️ {exercise.duration}</div>
-              <span className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">{exercise.category}</span>
-              <button className="w-full mt-4 py-2 bg-gradient-to-l from-purple-500 to-pink-600 text-white text-sm font-bold rounded-lg">
-                ابدأ التمرين
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-8 glass-card p-6">
-          <h3 className="text-white font-bold text-lg mb-4">📞 دعم فوري</h3>
-          <p className="text-gray-400 mb-4">هل تحتاج للتحدث مع مختص؟</p>
-          <button className="px-6 py-3 bg-gradient-to-l from-emerald-500 to-teal-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-            احجز جلسة مع مختص
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 🥗 نظام التغذية الذكية
-// ============================================
-
-export function SmartNutrition() {
-  const mealPlans = [
-    { id: 1, name: 'خطة بناء العضلات', calories: 2500, protein: '150g', icon: '💪' },
-    { id: 2, name: 'خطة فقدان الوزن', calories: 1800, protein: '120g', icon: '🏃' },
-    { id: 3, name: 'خطة الأداء', calories: 2200, protein: '140g', icon: '⚡' },
-    { id: 4, name: 'خطة الصيانة', calories: 2000, protein: '130g', icon: '🔧' },
-  ];
-
-  return (
-    <section id="smart-nutrition" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🥗 التغذية الذكية
-          </h2>
-          <p className="text-gray-400">خطط غذائية مخصصة لأهدافك</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {mealPlans.map((plan) => (
-            <div key={plan.id} className="glass-card p-6 hover:scale-105 transition-transform">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-3xl">
-                  {plan.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{plan.name}</h3>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
-                    <span>🔥 {plan.calories} سعرة</span>
-                    <span>🥩 {plan.protein} بروتين</span>
-                  </div>
-                </div>
-              </div>
-              <button className="w-full py-2 bg-gradient-to-l from-emerald-500 to-teal-600 text-white text-sm font-bold rounded-lg">
-                عرض الخطة
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-8 glass-card p-6">
-          <h3 className="text-white font-bold text-lg mb-4">📊 تتبع السعرات</h3>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="glass-card-light p-4 text-center">
-              <div className="text-2xl font-black text-emerald-400">1,850</div>
-              <div className="text-xs text-gray-400">سعرة اليوم</div>
-            </div>
-            <div className="glass-card-light p-4 text-center">
-              <div className="text-2xl font-black text-blue-400">120g</div>
-              <div className="text-xs text-gray-400">بروتين</div>
-            </div>
-            <div className="glass-card-light p-4 text-center">
-              <div className="text-2xl font-black text-purple-400">2,000</div>
-              <div className="text-xs text-gray-400">الهدف</div>
-            </div>
+        {/* Summary */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="glass-card p-4 text-center">
+            <div className="text-3xl mb-2">🏢</div>
+            <div className="text-2xl font-black text-white">{branches.length}</div>
+            <div className="text-gray-400 text-xs">فروع</div>
+          </div>
+          <div className="glass-card p-4 text-center">
+            <div className="text-3xl mb-2">👥</div>
+            <div className="text-2xl font-black text-blue-400">{branches.reduce((s, b) => s + b.players, 0)}</div>
+            <div className="text-gray-400 text-xs">لاعب</div>
+          </div>
+          <div className="glass-card p-4 text-center">
+            <div className="text-3xl mb-2">👨‍🏫</div>
+            <div className="text-2xl font-black text-purple-400">{branches.reduce((s, b) => s + b.coaches, 0)}</div>
+            <div className="text-gray-400 text-xs">مدرب</div>
+          </div>
+          <div className="glass-card p-4 text-center">
+            <div className="text-3xl mb-2">💰</div>
+            <div className="text-2xl font-black text-emerald-400">137K</div>
+            <div className="text-gray-400 text-xs">إيرادات</div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-// ============================================
-// 🎙️ نظام البودكاست
-// ============================================
-
-export function PodcastSystem() {
-  const episodes = [
-    { id: 1, title: 'أسرار النجاح الرياضي', guest: 'كابتن محمود', duration: '45 دقيقة', icon: '🎙️' },
-    { id: 2, title: 'التغذية الصحيحة', guest: 'د. أحمد سعيد', duration: '30 دقيقة', icon: '🥗' },
-    { id: 3, title: 'قصص نجاح', guest: 'لاعبون محترفون', duration: '60 دقيقة', icon: '⭐' },
-    { id: 4, title: 'الإصابات والوقاية', guest: 'د. محمد حسن', duration: '40 دقيقة', icon: '🏥' },
-  ];
-
-  return (
-    <section id="podcast" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🎙️ البودكاست
-          </h2>
-          <p className="text-gray-400">مقابلات ونصائح من الخبراء</p>
-        </div>
-
-        <div className="space-y-4">
-          {episodes.map((episode) => (
-            <div key={episode.id} className="glass-card p-6 hover:scale-[1.02] transition-transform">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-3xl">
-                  {episode.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{episode.title}</h3>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
-                    <span>🎤 {episode.guest}</span>
-                    <span>⏱️ {episode.duration}</span>
-                  </div>
-                </div>
-                <button className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white text-xl hover:scale-110 transition-transform">
-                  ▶️
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 🎵 نظام الموسيقى التحفيزية
-// ============================================
-
-export function MotivationalMusic() {
-  const playlists = [
-    { id: 1, name: 'تمارين القوة', songs: 25, duration: '1h 30m', icon: '💪' },
-    { id: 2, name: 'الجري والكارديو', songs: 30, duration: '2h', icon: '🏃' },
-    { id: 3, name: 'الاسترخاء', songs: 20, duration: '1h 15m', icon: '🧘' },
-    { id: 4, name: 'التحفيز', songs: 35, duration: '2h 30m', icon: '⚡' },
-  ];
-
-  return (
-    <section id="music" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🎵 الموسيقى التحفيزية
-          </h2>
-          <p className="text-gray-400">قوائم تشغيل مخصصة لأنشطتك</p>
-        </div>
-
+        {/* Branches Grid */}
         <div className="grid md:grid-cols-2 gap-6">
-          {playlists.map((playlist) => (
-            <div key={playlist.id} className="glass-card p-6 hover:scale-105 transition-transform">
+          {branches.map((branch) => (
+            <div key={branch.id} className="glass-card p-6 hover:scale-[1.02] transition-transform">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-3xl">
-                  {playlist.icon}
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-2xl">
+                  {branch.icon}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{playlist.name}</h3>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
-                    <span>🎵 {playlist.songs} أغنية</span>
-                    <span>⏱️ {playlist.duration}</span>
-                  </div>
+                  <h3 className="text-white font-bold">{branch.name}</h3>
+                  <p className="text-gray-400 text-sm">المدير: {branch.manager}</p>
+                </div>
+                <span className="px-2 py-1 bg-emerald-500/20 text-emerald-300 text-xs rounded-full">✓ نشط</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="glass-card-light p-2 text-center">
+                  <div className="text-lg font-bold text-white">{branch.players}</div>
+                  <div className="text-gray-400 text-[10px]">لاعب</div>
+                </div>
+                <div className="glass-card-light p-2 text-center">
+                  <div className="text-lg font-bold text-white">{branch.coaches}</div>
+                  <div className="text-gray-400 text-[10px]">مدرب</div>
+                </div>
+                <div className="glass-card-light p-2 text-center">
+                  <div className="text-lg font-bold text-emerald-400">{branch.revenue}</div>
+                  <div className="text-gray-400 text-[10px]">إيرادات</div>
                 </div>
               </div>
-              <button className="w-full py-2 bg-gradient-to-l from-pink-500 to-rose-600 text-white text-sm font-bold rounded-lg">
-                ▶️ تشغيل
-              </button>
             </div>
           ))}
         </div>
@@ -567,324 +384,70 @@ export function MotivationalMusic() {
 }
 
 // ============================================
-// 📸 نظام الفلاتر والتأثيرات
+// 📊 نظام Big Data والتحليلات
 // ============================================
+export function BigDataAnalytics() {
+  const metrics = [
+    { label: 'بيانات معالجة اليوم', value: '2.4M', icon: '📊', change: '+15%' },
+    { label: 'وقت المعالجة', value: '45ms', icon: '⚡', change: '-20%' },
+    { label: 'دقة التنبؤات', value: '94.7%', icon: '🎯', change: '+2.3%' },
+    { label: 'نماذج ML نشطة', value: '12', icon: '🧠', change: '+3' },
+  ];
 
-export function FiltersEffects() {
-  const filters = [
-    { id: 1, name: 'الأكاديمية', icon: '🏆', color: 'from-blue-500 to-purple-600' },
-    { id: 2, name: 'البطل', icon: '🥇', color: 'from-amber-500 to-orange-600' },
-    { id: 3, name: 'الطاقة', icon: '⚡', color: 'from-yellow-400 to-red-500' },
-    { id: 4, name: 'القوة', icon: '💪', color: 'from-red-500 to-pink-600' },
-    { id: 5, name: 'السرعة', icon: '🏃', color: 'from-cyan-400 to-blue-600' },
-    { id: 6, name: 'النجاح', icon: '⭐', color: 'from-purple-500 to-pink-600' },
+  const dataPipelines = [
+    { name: 'تحليل الأداء', status: 'active', records: '1.2M', lastRun: 'منذ 5 دقائق' },
+    { name: 'تنبؤ الإصابات', status: 'active', records: '850K', lastRun: 'منذ 15 دقيقة' },
+    { name: 'تحليل الحضور', status: 'active', records: '2.1M', lastRun: 'منذ دقيقة' },
+    { name: 'تقارير مالية', status: 'scheduled', records: '500K', lastRun: 'بعد ساعة' },
   ];
 
   return (
-    <section id="filters" className="py-20 px-4">
+    <section id="big-data" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
+            <span className="text-indigo-300 text-xs font-semibold">Big Data</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            📸 الفلاتر والتأثيرات
+            📊 Big Data والتحليلات المتقدمة
           </h2>
-          <p className="text-gray-400">فلاتر AR احترافية لصورك</p>
+          <p className="text-gray-400">تحليل بيانات ضخمة لاتخاذ قرارات ذكية</p>
         </div>
 
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-          {filters.map((filter) => (
-            <div key={filter.id} className="glass-card p-4 text-center hover:scale-110 transition-transform cursor-pointer">
-              <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${filter.color} flex items-center justify-center text-4xl mx-auto mb-2`}>
-                {filter.icon}
-              </div>
-              <div className="text-white text-xs font-bold">{filter.name}</div>
+        {/* Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {metrics.map((metric, i) => (
+            <div key={i} className="glass-card p-5 text-center hover:scale-105 transition-transform">
+              <div className="text-3xl mb-2">{metric.icon}</div>
+              <div className="text-2xl font-black text-white mb-1">{metric.value}</div>
+              <div className="text-gray-400 text-xs mb-1">{metric.label}</div>
+              <div className="text-emerald-400 text-xs font-bold">{metric.change}</div>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 glass-card p-6 text-center">
-          <div className="text-6xl mb-4">📷</div>
-          <h3 className="text-white font-bold text-lg mb-2">التقط صورة الآن</h3>
-          <p className="text-gray-400 text-sm mb-4">استخدم الفلاتر وشارك إنجازاتك</p>
-          <button className="px-6 py-3 bg-gradient-to-l from-pink-500 to-purple-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-            📸 افتح الكاميرا
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 🤝 نظام الشراكات
-// ============================================
-
-export function Partnerships() {
-  const partners = [
-    { id: 1, name: 'نايك', category: 'ملابس رياضية', discount: '20%', icon: '✓' },
-    { id: 2, name: 'أديداس', category: 'معدات رياضية', discount: '15%', icon: '✓' },
-    { id: 3, name: 'فودافون', category: 'اتصالات', discount: '10%', icon: '✓' },
-    { id: 4, name: 'باناسونيك', category: 'إلكترونيات', discount: '25%', icon: '✓' },
-  ];
-
-  return (
-    <section id="partnerships" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🤝 الشراكات والعروض
-          </h2>
-          <p className="text-gray-400">عروض حصرية من شركائنا</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {partners.map((partner) => (
-            <div key={partner.id} className="glass-card p-6 text-center hover:scale-105 transition-transform">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl mx-auto mb-4">
-                {partner.icon}
-              </div>
-              <h3 className="text-white font-bold text-lg mb-2">{partner.name}</h3>
-              <p className="text-gray-400 text-sm mb-3">{partner.category}</p>
-              <div className="text-3xl font-black text-emerald-400 mb-4">{partner.discount}</div>
-              <button className="w-full py-2 bg-gradient-to-l from-emerald-500 to-teal-600 text-white text-sm font-bold rounded-lg">
-                احصل على العرض
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 💰 نظام التبرعات
-// ============================================
-
-export function DonationsSystem() {
-  const campaigns = [
-    { id: 1, title: 'دعم اللاعبين المحتاجين', raised: 15000, target: 25000, icon: '🤝' },
-    { id: 2, title: 'تجهيز الملعب الجديد', raised: 45000, target: 100000, icon: '🏟️' },
-    { id: 3, title: 'شراء معدات تدريب', raised: 8000, target: 15000, icon: '⚽' },
-  ];
-
-  return (
-    <section id="donations" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            💰 التبرعات
-          </h2>
-          <p className="text-gray-400">ساهم في دعم الأكاديمية واللاعبين</p>
-        </div>
-
-        <div className="space-y-6">
-          {campaigns.map((campaign) => {
-            const percentage = (campaign.raised / campaign.target) * 100;
-            return (
-              <div key={campaign.id} className="glass-card p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-3xl">
-                    {campaign.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-white font-bold text-lg">{campaign.title}</h3>
-                    <div className="flex items-center gap-3 text-sm text-gray-400">
-                      <span>💰 {campaign.raised.toLocaleString()} ج.م</span>
-                      <span>🎯 {campaign.target.toLocaleString()} ج.م</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="h-3 bg-gray-700 rounded-full overflow-hidden mb-2">
-                  <div
-                    className="h-full bg-gradient-to-l from-emerald-500 to-teal-600"
-                    style={{ width: `${percentage}%` }}
-                  />
-                </div>
-                <div className="flex items-center justify-between text-xs text-gray-400 mb-4">
-                  <span>{percentage.toFixed(1)}% مكتمل</span>
-                  <span>{(campaign.target - campaign.raised).toLocaleString()} ج.م متبقي</span>
-                </div>
-                <button className="w-full py-3 bg-gradient-to-l from-emerald-500 to-teal-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-                  تبرع الآن
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 📊 نظام التقارير المالية المتقدمة
-// ============================================
-
-export function AdvancedFinancialReports() {
-  const reports = [
-    { id: 1, title: 'تقرير الإيرادات الشهري', date: '2026-01', type: 'PDF', icon: '💰' },
-    { id: 2, title: 'تقرير المصروفات', date: '2026-01', type: 'Excel', icon: '💸' },
-    { id: 3, title: 'الميزانية العمومية', date: '2026-01', type: 'PDF', icon: '📊' },
-    { id: 4, title: 'تقرير التدفقات النقدية', date: '2026-01', type: 'Excel', icon: '💵' },
-  ];
-
-  return (
-    <section id="financial-reports" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            📊 التقارير المالية المتقدمة
-          </h2>
-          <p className="text-gray-400">تقارير مفصلة وتحليلات متقدمة</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {reports.map((report) => (
-            <div key={report.id} className="glass-card p-6 hover:scale-105 transition-transform">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-3xl">
-                  {report.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{report.title}</h3>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
-                    <span>📅 {report.date}</span>
-                    <span className="px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded text-xs">{report.type}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <button className="flex-1 py-2 bg-blue-500/20 border border-blue-500/30 rounded-lg text-blue-300 text-sm">
-                  📥 تحميل
-                </button>
-                <button className="flex-1 py-2 bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-300 text-sm">
-                  👁️ معاينة
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
+        {/* Data Pipelines */}
         <div className="glass-card p-6">
-          <h3 className="text-white font-bold text-lg mb-4">📈 التحليلات المتقدمة</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="glass-card-light p-4 text-center">
-              <div className="text-2xl font-black text-emerald-400">+15%</div>
-              <div className="text-xs text-gray-400">نمو الإيرادات</div>
-            </div>
-            <div className="glass-card-light p-4 text-center">
-              <div className="text-2xl font-black text-blue-400">-8%</div>
-              <div className="text-xs text-gray-400">انخفاض المصروفات</div>
-            </div>
-            <div className="glass-card-light p-4 text-center">
-              <div className="text-2xl font-black text-purple-400">92%</div>
-              <div className="text-xs text-gray-400">هامش الربح</div>
-            </div>
-            <div className="glass-card-light p-4 text-center">
-              <div className="text-2xl font-black text-amber-400">4.5x</div>
-              <div className="text-xs text-gray-400">العائد على الاستثمار</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 🎭 نظام المحاكاة
-// ============================================
-
-export function SimulationSystem() {
-  const scenarios = [
-    { id: 1, title: 'محاكاة المباراة النهائية', duration: '45 دقيقة', difficulty: 'متقدم', icon: '🏆' },
-    { id: 2, title: 'سيناريو الضغط العالي', duration: '30 دقيقة', difficulty: 'صعب', icon: '😰' },
-    { id: 3, title: 'اتخاذ القرارات', duration: '20 دقيقة', difficulty: 'متوسط', icon: '🎯' },
-    { id: 4, title: 'العمل الجماعي', duration: '25 دقيقة', difficulty: 'متوسط', icon: '🤝' },
-  ];
-
-  return (
-    <section id="simulation" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🎭 نظام المحاكاة
-          </h2>
-          <p className="text-gray-400">سيناريوهات تدريبية واقعية</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {scenarios.map((scenario) => (
-            <div key={scenario.id} className="glass-card p-6 hover:scale-105 transition-transform">
-              <div className="text-5xl mb-4 text-center">{scenario.icon}</div>
-              <h3 className="text-white font-bold text-lg mb-2 text-center">{scenario.title}</h3>
-              <div className="flex items-center justify-center gap-3 text-sm text-gray-400 mb-4">
-                <span>⏱️ {scenario.duration}</span>
-                <span>🎯 {scenario.difficulty}</span>
-              </div>
-              <button className="w-full py-3 bg-gradient-to-l from-purple-500 to-pink-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-                ابدأ المحاكاة
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// 🌐 نظام الميتافيرس
-// ============================================
-
-export function MetaverseSystem() {
-  const worlds = [
-    { id: 1, name: 'عالم التدريب', visitors: 234, icon: '🏋️', status: 'active' },
-    { id: 2, name: 'ملعب البطولات', visitors: 567, icon: '🏟️', status: 'active' },
-    { id: 3, name: 'صالة الاجتماعات', visitors: 89, icon: '🤝', status: 'active' },
-    { id: 4, name: 'عالم الاسترخاء', visitors: 156, icon: '🧘', status: 'active' },
-  ];
-
-  return (
-    <section id="metaverse" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🌐 الميتافيرس
-          </h2>
-          <p className="text-gray-400">عالم افتراضي للتدريب والاجتماعات</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {worlds.map((world) => (
-            <div key={world.id} className="glass-card p-6 hover:scale-105 transition-transform">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-3xl">
-                  {world.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{world.name}</h3>
-                  <div className="flex items-center gap-2 text-sm text-gray-400">
-                    <span>👥 {world.visitors} زائر</span>
-                    <span className="w-2 h-2 bg-emerald-400 rounded-full" />
-                    <span className="text-emerald-400 text-xs">نشط</span>
+          <h3 className="text-white font-bold text-lg mb-4">🔄 خطوط معالجة البيانات</h3>
+          <div className="space-y-3">
+            {dataPipelines.map((pipeline, i) => (
+              <div key={i} className="glass-card-light p-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className={`w-3 h-3 rounded-full ${pipeline.status === 'active' ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`} />
+                  <div>
+                    <div className="text-white font-bold text-sm">{pipeline.name}</div>
+                    <div className="text-gray-400 text-xs">{pipeline.records} سجل • {pipeline.lastRun}</div>
                   </div>
                 </div>
+                <span className={`px-2 py-1 rounded-full text-xs ${
+                  pipeline.status === 'active' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'
+                }`}>
+                  {pipeline.status === 'active' ? '🟢 نشط' : '⏰ مجدول'}
+                </span>
               </div>
-              <button className="w-full py-3 bg-gradient-to-l from-purple-500 to-pink-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-                🌐 ادخل العالم
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <div className="glass-card p-6 text-center">
-          <div className="text-6xl mb-4">🥽</div>
-          <h3 className="text-white font-bold text-xl mb-2">استعد للدخول للميتافيرس</h3>
-          <p className="text-gray-400 mb-4">تحتاج نظارة VR أو متصفح متوافق</p>
-          <button className="px-8 py-4 bg-gradient-to-l from-purple-500 to-pink-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
-            🚀 ابدأ الآن
-          </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
