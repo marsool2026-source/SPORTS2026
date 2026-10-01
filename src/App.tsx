@@ -14,6 +14,9 @@ import QRAttendanceSystem from './components/QRAttendanceSystem';
 import { ARTraining, BlockchainCertificates, IoTDevices, FaceRecognition } from './components/AdvancedFeatures1';
 import { FacilityBooking, ReviewsSystem, AdvancedSearch, SmartRecommendations } from './components/AdvancedFeatures2';
 import { AffiliateMarketing, ECertificates, NewsBlog, Surveys, AdvancedLiveStream, PredictiveAnalytics, AdvancedCustomization } from './components/AdvancedFeatures3';
+import GamificationSystem from './components/GamificationSystem';
+import VRTraining from './components/VRTraining';
+import { EmotionalAI, VoiceChat, SocialGroups, Competitions, StoriesSystem, RemoteTraining, MentalHealth, SmartNutrition, PodcastSystem, MotivationalMusic, FiltersEffects, Partnerships, DonationsSystem, AdvancedFinancialReports, SimulationSystem, MetaverseSystem } from './components/AdvancedFeatures4';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -95,6 +98,24 @@ function Header() {
     { id: 'stream', label: 'البث', icon: '📹' },
     { id: 'predictive', label: 'التنبؤ', icon: '📈' },
     { id: 'customize', label: 'التخصيص', icon: '🎨' },
+    { id: 'gamification', label: 'الألعاب', icon: '🎮' },
+    { id: 'vr', label: 'VR', icon: '🥽' },
+    { id: 'emotional', label: 'العاطفي', icon: '🧠' },
+    { id: 'voice-chat', label: 'الدردشة', icon: '💬' },
+    { id: 'social-groups', label: 'المجموعات', icon: '👥' },
+    { id: 'competitions', label: 'المسابقات', icon: '🏆' },
+    { id: 'stories', label: 'القصص', icon: '🎬' },
+    { id: 'remote-training', label: 'عن بعد', icon: '🎓' },
+    { id: 'mental-health', label: 'الصحة', icon: '🧠' },
+    { id: 'nutrition', label: 'التغذية', icon: '🥗' },
+    { id: 'podcast', label: 'البودكاست', icon: '🎙️' },
+    { id: 'music', label: 'الموسيقى', icon: '🎵' },
+    { id: 'filters', label: 'الفلاتر', icon: '📸' },
+    { id: 'partnerships', label: 'الشراكات', icon: '🤝' },
+    { id: 'donations', label: 'التبرعات', icon: '💰' },
+    { id: 'financial-reports', label: 'التقارير', icon: '📊' },
+    { id: 'simulation', label: 'المحاكاة', icon: '🎭' },
+    { id: 'metaverse', label: 'الميتافيرس', icon: '🌐' },
   ];
 
   return (
@@ -370,6 +391,24 @@ function AppContent() {
       case 'stream': return <AdvancedLiveStream />;
       case 'predictive': return <PredictiveAnalytics />;
       case 'customize': return <AdvancedCustomization />;
+      case 'gamification': return <GamificationSystem />;
+      case 'vr': return <VRTraining />;
+      case 'emotional': return <EmotionalAI />;
+      case 'voice-chat': return <VoiceChat />;
+      case 'social-groups': return <SocialGroups />;
+      case 'competitions': return <Competitions />;
+      case 'stories': return <StoriesSystem />;
+      case 'remote-training': return <RemoteTraining />;
+      case 'mental-health': return <MentalHealth />;
+      case 'nutrition': return <SmartNutrition />;
+      case 'podcast': return <PodcastSystem />;
+      case 'music': return <MotivationalMusic />;
+      case 'filters': return <FiltersEffects />;
+      case 'partnerships': return <Partnerships />;
+      case 'donations': return <DonationsSystem />;
+      case 'financial-reports': return <AdvancedFinancialReports />;
+      case 'simulation': return <SimulationSystem />;
+      case 'metaverse': return <MetaverseSystem />;
       default: return <Dashboard />;
     }
   };
