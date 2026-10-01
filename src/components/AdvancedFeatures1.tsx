@@ -1,68 +1,94 @@
 import { useState } from 'react';
 
 // ============================================
-// 🥽 نظام الواقع المعزز (AR)
+// 🥽 نظام الواقع المعزز (AR Training)
 // ============================================
-
 export function ARTraining() {
   const [activeExercise, setActiveExercise] = useState<number | null>(null);
+  const [arActive, setArActive] = useState(false);
 
   const exercises = [
-    { id: 1, name: 'تسديد على المرمى', icon: '⚽', difficulty: 'متوسط', duration: '15 دقيقة', points: 100 },
-    { id: 2, name: 'مراوغة اللاعبين', icon: '🏃', difficulty: 'صعب', duration: '20 دقيقة', points: 150 },
-    { id: 3, name: 'تمريرات دقيقة', icon: '🎯', difficulty: 'سهل', duration: '10 دقائق', points: 75 },
-    { id: 4, name: 'حركات حارس المرمى', icon: '🧤', difficulty: 'صعب', duration: '25 دقيقة', points: 200 },
+    { id: 1, name: 'تدريب التسديد', icon: '⚽', difficulty: 'متوسط', duration: '15 دقيقة', points: 100 },
+    { id: 2, name: 'تدريب المراوغة', icon: '🏃', difficulty: 'صعب', duration: '20 دقيقة', points: 150 },
+    { id: 3, name: 'تدريب التمرير', icon: '🎯', difficulty: 'سهل', duration: '10 دقائق', points: 80 },
+    { id: 4, name: 'تدريب الحراسة', icon: '🧤', difficulty: 'صعب', duration: '25 دقيقة', points: 200 },
   ];
 
   return (
     <section id="ar-training" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+            <span className="text-purple-300 text-xs font-semibold">تقنية متقدمة</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             🥽 التدريب بالواقع المعزز
           </h2>
-          <p className="text-gray-400">تمارين تفاعلية ثلاثية الأبعاد</p>
+          <p className="text-gray-400">تجربة تدريبية تفاعلية ثلاثية الأبعاد</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {exercises.map((exercise) => (
-            <div
-              key={exercise.id}
-              onClick={() => setActiveExercise(exercise.id)}
-              className={`glass-card p-6 cursor-pointer transition-all hover:scale-105 ${
-                activeExercise === exercise.id ? 'ring-2 ring-blue-500' : ''
-              }`}
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl">
-                  {exercise.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{exercise.name}</h3>
-                  <div className="flex gap-2 mt-1">
-                    <span className="px-2 py-0.5 bg-amber-500/20 text-amber-300 text-xs rounded">{exercise.difficulty}</span>
-                    <span className="px-2 py-0.5 bg-blue-500/20 text-blue-300 text-xs rounded">{exercise.duration}</span>
+          {/* AR View */}
+          <div className="glass-card p-6">
+            <div className="aspect-video bg-gradient-to-br from-purple-900/50 to-blue-900/50 rounded-xl flex items-center justify-center relative overflow-hidden mb-4">
+              {arActive ? (
+                <div className="text-center">
+                  <div className="text-6xl mb-4 animate-bounce">🥽</div>
+                  <div className="text-white font-bold">الواقع المعزز نشط</div>
+                  <div className="text-purple-300 text-sm mt-2">جاري تحليل الحركة...</div>
+                  <div className="mt-4 grid grid-cols-3 gap-2">
+                    {['السرعة', 'الدقة', 'القوة'].map((metric, i) => (
+                      <div key={i} className="bg-white/10 rounded-lg p-2">
+                        <div className="text-purple-300 text-xs">{metric}</div>
+                        <div className="text-white font-bold">{85 + i * 5}%</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="text-amber-400 font-bold">+{exercise.points}</div>
-              </div>
-
-              {activeExercise === exercise.id && (
-                <div className="mt-4 pt-4 border-t border-white/10">
-                  <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl flex items-center justify-center mb-4">
-                    <div className="text-center">
-                      <div className="text-6xl mb-2">{exercise.icon}</div>
-                      <p className="text-white text-sm">محاكاة AR</p>
-                      <p className="text-gray-400 text-xs">استخدم الكاميرا للتفاعل</p>
-                    </div>
-                  </div>
-                  <button className="w-full py-3 bg-gradient-to-l from-blue-500 to-purple-600 text-white font-bold rounded-lg">
-                    🚀 ابدأ التمرين
-                  </button>
+              ) : (
+                <div className="text-center">
+                  <div className="text-6xl mb-4 opacity-50">🥽</div>
+                  <div className="text-gray-400">اضغط لبدء الواقع المعزز</div>
                 </div>
               )}
             </div>
-          ))}
+            <button
+              onClick={() => setArActive(!arActive)}
+              className={`w-full py-3 rounded-lg font-bold transition-all ${
+                arActive
+                  ? 'bg-red-500/20 border border-red-500/30 text-red-300'
+                  : 'bg-gradient-to-l from-purple-500 to-violet-600 text-white'
+              }`}
+            >
+              {arActive ? '⏸️ إيقاف AR' : '🥽 بدء الواقع المعزز'}
+            </button>
+          </div>
+
+          {/* Exercises */}
+          <div className="space-y-3">
+            <h3 className="text-white font-bold text-lg mb-4">📋 التمارين المتاحة</h3>
+            {exercises.map((exercise) => (
+              <div
+                key={exercise.id}
+                onClick={() => setActiveExercise(exercise.id)}
+                className={`glass-card p-4 cursor-pointer transition-all ${
+                  activeExercise === exercise.id ? 'ring-2 ring-purple-500/50' : ''
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="text-3xl">{exercise.icon}</div>
+                  <div className="flex-1">
+                    <div className="text-white font-bold">{exercise.name}</div>
+                    <div className="text-gray-400 text-xs">
+                      {exercise.difficulty} • {exercise.duration}
+                    </div>
+                  </div>
+                  <div className="text-purple-400 font-bold">+{exercise.points}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -72,54 +98,63 @@ export function ARTraining() {
 // ============================================
 // 🔗 نظام Blockchain للشهادات
 // ============================================
-
 export function BlockchainCertificates() {
+  const [selectedCert, setSelectedCert] = useState<number | null>(null);
+
   const certificates = [
-    { id: 1, title: 'شهادة إتمام دورة كرة القدم', date: '2026-01-15', hash: '0x7f8a9b...c3d4e5', verified: true },
-    { id: 2, title: 'شهادة المشاركة في البطولة', date: '2026-01-10', hash: '0x3e4f5a...b6c7d8', verified: true },
-    { id: 3, title: 'شهادة التفوق الرياضي', date: '2025-12-20', hash: '0x9a8b7c...d2e1f0', verified: true },
+    { id: 1, title: 'شهادة إتمام دورة كرة القدم', player: 'أحمد محمد علي', date: '2026-01-15', hash: '0x7a3b...9f2c', verified: true, level: 'ذهبي' },
+    { id: 2, title: 'شهادة بطل المنطقة 2025', player: 'محمد خالد حسن', date: '2025-12-20', hash: '0x8b4c...0g3d', verified: true, level: 'بلاتيني' },
+    { id: 3, title: 'شهادة اللياقة البدنية', player: 'يوسف أحمد سعيد', date: '2026-01-10', hash: '0x9c5d...1h4e', verified: true, level: 'فضي' },
   ];
 
   return (
-    <section id="blockchain-cert" className="py-20 px-4">
+    <section id="blockchain-certs" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+            <span className="text-blue-300 text-xs font-semibold">Blockchain</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            🔗 الشهادات الرقمية
+            🔗 شهادات Blockchain
           </h2>
-          <p className="text-gray-400">شهادات غير قابلة للتزوير على Blockchain</p>
+          <p className="text-gray-400">شهادات رقمية غير قابلة للتزوير على Blockchain</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="grid md:grid-cols-3 gap-6">
           {certificates.map((cert) => (
-            <div key={cert.id} className="glass-card p-6 hover:scale-[1.02] transition-transform">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-2xl">
-                    🏆
-                  </div>
-                  <div>
-                    <h3 className="text-white font-bold">{cert.title}</h3>
-                    <p className="text-gray-400 text-sm">{cert.date}</p>
-                  </div>
+            <div
+              key={cert.id}
+              onClick={() => setSelectedCert(cert.id)}
+              className="glass-card p-6 cursor-pointer hover:scale-105 transition-all"
+            >
+              <div className="text-center mb-4">
+                <div className="text-5xl mb-2">🏆</div>
+                <h3 className="text-white font-bold text-sm">{cert.title}</h3>
+              </div>
+              <div className="space-y-2 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">اللاعب:</span>
+                  <span className="text-white">{cert.player}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">التاريخ:</span>
+                  <span className="text-white">{cert.date}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">المستوى:</span>
+                  <span className="text-amber-400 font-bold">{cert.level}</span>
+                </div>
+                <div className="pt-2 border-t border-white/10">
+                  <div className="text-gray-400 text-[10px] mb-1">Blockchain Hash:</div>
+                  <code className="text-blue-400 text-[10px] font-mono">{cert.hash}</code>
                 </div>
                 {cert.verified && (
-                  <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-500/30 rounded-full text-emerald-300 text-xs font-bold">
-                    ✓ موثق
-                  </span>
+                  <div className="flex items-center gap-1 text-emerald-400 text-xs mt-2">
+                    <span>✓</span>
+                    <span>موثق على Blockchain</span>
+                  </div>
                 )}
-              </div>
-              <div className="glass-card-light p-3">
-                <div className="text-xs text-gray-400 mb-1">Blockchain Hash:</div>
-                <code className="text-blue-400 text-xs font-mono">{cert.hash}</code>
-              </div>
-              <div className="flex gap-2 mt-4">
-                <button className="flex-1 py-2 bg-blue-500/20 border border-blue-500/30 rounded-lg text-blue-300 text-sm">
-                  📥 تحميل PDF
-                </button>
-                <button className="flex-1 py-2 bg-purple-500/20 border border-purple-500/30 rounded-lg text-purple-300 text-sm">
-                  🔍 تحقق
-                </button>
               </div>
             </div>
           ))}
@@ -132,51 +167,65 @@ export function BlockchainCertificates() {
 // ============================================
 // 📡 نظام IoT للأجهزة الذكية
 // ============================================
-
 export function IoTDevices() {
   const devices = [
-    { id: 1, name: 'ساعة ذكية', icon: '⌚', status: 'connected', battery: 85, data: 'نبض: 72 | خطوات: 8,432' },
-    { id: 2, name: 'جهاز تتبع اللياقة', icon: '📿', status: 'connected', battery: 92, data: 'سعرات: 450 | مسافة: 5.2 كم' },
-    { id: 3, name: 'كاميرا تحليل', icon: '📹', status: 'connected', battery: 100, data: 'دقة: 95% | تحليل: مباشر' },
-    { id: 4, name: 'جهاز قياس السرعة', icon: '⚡', status: 'disconnected', battery: 0, data: 'غير متصل' },
+    { id: 1, name: 'ساعة ذكية - أحمد', type: 'Apple Watch', battery: 85, status: 'active', heartRate: 72, steps: 8450 },
+    { id: 2, name: 'جهاز تتبع - محمد', type: 'Fitbit', battery: 92, status: 'active', heartRate: 68, steps: 12300 },
+    { id: 3, name: 'كاميرا ذكية - الملعب', type: 'Security Cam', battery: 100, status: 'active', heartRate: 0, steps: 0 },
+    { id: 4, name: 'جهاز قياس السرعة', type: 'Speed Radar', battery: 78, status: 'active', heartRate: 0, steps: 0 },
   ];
 
   return (
     <section id="iot-devices" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+            <span className="text-cyan-300 text-xs font-semibold">IoT</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             📡 الأجهزة الذكية
           </h2>
           <p className="text-gray-400">تكامل مع أجهزة اللياقة والساعات الذكية</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {devices.map((device) => (
-            <div key={device.id} className="glass-card p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-3xl">
-                  {device.icon}
+            <div key={device.id} className="glass-card p-5">
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-3xl">
+                  {device.type.includes('Watch') ? '⌚' : device.type.includes('Fitbit') ? '📱' : device.type.includes('Cam') ? '📷' : '📡'}
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-lg">{device.name}</h3>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className={`w-2 h-2 rounded-full ${device.status === 'connected' ? 'bg-emerald-400' : 'bg-red-400'}`} />
-                    <span className="text-gray-400 text-xs">
-                      {device.status === 'connected' ? 'متصل' : 'غير متصل'}
-                    </span>
-                  </div>
+                <span className={`w-2 h-2 rounded-full ${device.status === 'active' ? 'bg-emerald-400' : 'bg-red-400'}`} />
+              </div>
+              <h3 className="text-white font-bold text-sm mb-1">{device.name}</h3>
+              <p className="text-gray-400 text-xs mb-3">{device.type}</p>
+              
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-gray-400">البطارية</span>
+                  <span className="text-white">{device.battery}%</span>
                 </div>
-                {device.battery > 0 && (
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-emerald-400">{device.battery}%</div>
-                    <div className="text-xs text-gray-400">بطارية</div>
+                <div className="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full ${device.battery > 50 ? 'bg-emerald-500' : device.battery > 20 ? 'bg-amber-500' : 'bg-red-500'}`}
+                    style={{ width: `${device.battery}%` }}
+                  />
+                </div>
+                
+                {device.heartRate > 0 && (
+                  <div className="flex items-center justify-between text-xs mt-2">
+                    <span className="text-gray-400">❤️ نبض القلب</span>
+                    <span className="text-red-400 font-bold">{device.heartRate} bpm</span>
                   </div>
                 )}
-              </div>
-              <div className="glass-card-light p-3">
-                <div className="text-gray-400 text-xs mb-1">البيانات الحية:</div>
-                <div className="text-white text-sm">{device.data}</div>
+                
+                {device.steps > 0 && (
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-gray-400">👟 الخطوات</span>
+                    <span className="text-cyan-400 font-bold">{device.steps.toLocaleString()}</span>
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -189,17 +238,16 @@ export function IoTDevices() {
 // ============================================
 // 👤 نظام التعرف على الوجه
 // ============================================
-
 export function FaceRecognition() {
   const [scanning, setScanning] = useState(false);
-  const [recognized, setRecognized] = useState(false);
+  const [recognized, setRecognized] = useState<string | null>(null);
 
   const startScan = () => {
     setScanning(true);
+    setRecognized(null);
     setTimeout(() => {
       setScanning(false);
-      setRecognized(true);
-      setTimeout(() => setRecognized(false), 3000);
+      setRecognized('أحمد محمد علي');
     }, 2000);
   };
 
@@ -207,6 +255,10 @@ export function FaceRecognition() {
     <section id="face-recognition" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-4">
+            <span className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" />
+            <span className="text-pink-300 text-xs font-semibold">AI</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             👤 التعرف على الوجه
           </h2>
@@ -214,25 +266,26 @@ export function FaceRecognition() {
         </div>
 
         <div className="glass-card p-8">
-          <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center mb-6 relative overflow-hidden">
+          <div className="aspect-video bg-gradient-to-br from-pink-900/30 to-purple-900/30 rounded-xl flex items-center justify-center relative overflow-hidden mb-6">
             {scanning ? (
               <div className="text-center">
                 <div className="text-6xl mb-4 animate-pulse">👤</div>
-                <p className="text-white font-bold">جاري التعرف...</p>
+                <div className="text-white font-bold">جاري المسح...</div>
                 <div className="mt-4 w-48 h-1 bg-gray-700 rounded-full overflow-hidden mx-auto">
-                  <div className="h-full bg-gradient-to-l from-purple-500 to-pink-500 animate-pulse" style={{ width: '70%' }} />
+                  <div className="h-full bg-gradient-to-l from-pink-500 to-purple-500 animate-pulse" style={{ width: '70%' }} />
                 </div>
               </div>
             ) : recognized ? (
               <div className="text-center">
                 <div className="text-6xl mb-4">✅</div>
-                <p className="text-emerald-400 font-bold text-xl">تم التعرف بنجاح!</p>
-                <p className="text-white mt-2">أحمد محمد علي - ناشئين U10</p>
+                <div className="text-emerald-400 font-bold text-xl">تم التعرف!</div>
+                <div className="text-white mt-2">{recognized}</div>
+                <div className="text-gray-400 text-sm mt-1">تم تسجيل الحضور</div>
               </div>
             ) : (
               <div className="text-center">
                 <div className="text-6xl mb-4 opacity-50">👤</div>
-                <p className="text-gray-400">اضغط لبدء المسح</p>
+                <div className="text-gray-400">اضغط لبدء المسح</div>
               </div>
             )}
           </div>
@@ -240,25 +293,10 @@ export function FaceRecognition() {
           <button
             onClick={startScan}
             disabled={scanning}
-            className="w-full py-4 bg-gradient-to-l from-purple-500 to-pink-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="w-full py-3 bg-gradient-to-l from-pink-500 to-purple-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {scanning ? '🔄 جاري المسح...' : '📷 ابدأ التعرف'}
+            {scanning ? '🔄 جاري المسح...' : recognized ? '🔄 مسح جديد' : '👤 بدء التعرف على الوجه'}
           </button>
-
-          <div className="grid grid-cols-3 gap-4 mt-6">
-            <div className="glass-card-light p-3 text-center">
-              <div className="text-2xl font-black text-emerald-400">99.5%</div>
-              <div className="text-xs text-gray-400">دقة التعرف</div>
-            </div>
-            <div className="glass-card-light p-3 text-center">
-              <div className="text-2xl font-black text-blue-400">&lt;2s</div>
-              <div className="text-xs text-gray-400">زمن الاستجابة</div>
-            </div>
-            <div className="glass-card-light p-3 text-center">
-              <div className="text-2xl font-black text-purple-400">AES</div>
-              <div className="text-xs text-gray-400">تشفير البيانات</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
