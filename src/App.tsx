@@ -18,6 +18,8 @@ import { APIIntegration, SocialMediaIntegration, AutoContentCreation, Automation
 import { PredictionSystem, InteractiveMaps, AdvancedMultiLanguage, AdvancedSubscriptions, GiftsAndDonations } from './components/AdvancedFeatures6';
 import { MetaverseSystem, AICoach, AdvancedPaymentSystem } from './components/AdvancedFeatures7';
 import { IntegrationTestSystem, SystemMonitoring } from './components/IntegrationTestSystem';
+import { CRMSystem, InventorySystem, AdvancedFinancialReports, EmployeeManagement } from './components/AdvancedFeatures8';
+import { InterAcademyCompetitions, PodcastSystem, PartnershipsSystem } from './components/AdvancedFeatures9';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -116,6 +118,13 @@ function Header() {
     { id: 'payment', label: 'دفع', icon: '💳' },
     { id: 'integration-test', label: 'اختبار', icon: '🧪' },
     { id: 'monitoring', label: 'مراقبة', icon: '📊' },
+    { id: 'crm', label: 'CRM', icon: '💼' },
+    { id: 'inventory', label: 'مخزون', icon: '🏋️' },
+    { id: 'financial-reports', label: 'تقارير مالية', icon: '📊' },
+    { id: 'employees', label: 'موظفين', icon: '👥' },
+    { id: 'competitions', label: 'مسابقات', icon: '🏆' },
+    { id: 'podcast', label: 'بودكاست', icon: '🎙️' },
+    { id: 'partnerships', label: 'شراكات', icon: '🤝' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
   ];
 
@@ -409,6 +418,13 @@ function AppContent() {
       case 'payment': return <AdvancedPaymentSystem />;
       case 'integration-test': return <IntegrationTestSystem />;
       case 'monitoring': return <SystemMonitoring />;
+      case 'crm': return <CRMSystem />;
+      case 'inventory': return <InventorySystem />;
+      case 'financial-reports': return <AdvancedFinancialReports />;
+      case 'employees': return <EmployeeManagement />;
+      case 'competitions': return <InterAcademyCompetitions />;
+      case 'podcast': return <PodcastSystem />;
+      case 'partnerships': return <PartnershipsSystem />;
       case 'language': return <MultiLanguage />;
       default: return <Dashboard />;
     }
