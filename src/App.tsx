@@ -22,6 +22,7 @@ import { CRMSystem, InventorySystem, AdvancedFinancialReports, EmployeeManagemen
 import { InterAcademyCompetitions, PodcastSystem, PartnershipsSystem } from './components/AdvancedFeatures9';
 import UserPages from './components/UserPages';
 import ProfessionalQRCode from './components/ProfessionalQRCode';
+import Settings from './components/Settings';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -129,6 +130,7 @@ function Header() {
     { id: 'partnerships', label: 'شراكات', icon: '🤝' },
     { id: 'user-pages', label: 'صفحات المستخدم', icon: '📱' },
     { id: 'qr-code', label: 'QR Code', icon: '📱' },
+    { id: 'settings', label: 'الإعدادات', icon: '⚙️' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
   ];
 
@@ -431,6 +433,7 @@ function AppContent() {
       case 'partnerships': return <PartnershipsSystem />;
       case 'user-pages': return <UserPages />;
       case 'qr-code': return <ProfessionalQRCode />;
+      case 'settings': return <Settings />;
       case 'language': return <MultiLanguage />;
       default: return <Dashboard />;
     }

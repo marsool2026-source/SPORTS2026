@@ -12,6 +12,45 @@
   body {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
     min-height: 100vh;
+    transition: background 0.3s ease;
+  }
+  
+  /* Light Mode */
+  body.light-mode {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f8fafc 100%);
+  }
+  
+  body.light-mode .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  body.light-mode .glass-card-light {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  body.light-mode .text-white {
+    color: #1e293b !important;
+  }
+  
+  body.light-mode .text-gray-400 {
+    color: #64748b !important;
+  }
+  
+  body.light-mode .text-gray-500 {
+    color: #94a3b8 !important;
+  }
+  
+  body.light-mode .bg-white\/5 {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  body.light-mode .bg-white\/10 {
+    background: rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  body.light-mode .border-white\/10 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
   }
 }
 
