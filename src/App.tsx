@@ -480,13 +480,17 @@ function AppContent() {
 }
 
 // ============================================
-// 🌍 App with Language Provider
+// 🌍 App with Language Provider + Auth Provider
 // ============================================
+
+import { AuthProvider } from './contexts/AuthContext';
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
+    <AuthProvider>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </AuthProvider>
   );
 }
