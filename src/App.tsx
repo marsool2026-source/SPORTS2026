@@ -25,6 +25,7 @@ import ProfessionalQRCode from './components/ProfessionalQRCode';
 import Settings from './components/Settings';
 import { UserAnalytics, AutoSupport, FeedbackSystem, AdvancedReferral } from './components/AdvancedFeatures10';
 import { AutoContent, B2BSystem, MobileAppInfo } from './components/AdvancedFeatures11';
+import FullPresentation from './components/FullPresentation';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -140,6 +141,7 @@ function Header() {
     { id: 'content-gen', label: 'المحتوى', icon: '📝' },
     { id: 'b2b', label: 'B2B', icon: '🏢' },
     { id: 'mobile-app', label: 'التطبيق', icon: '📱' },
+    { id: 'full-presentation', label: 'العرض الكامل', icon: '📋' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
   ];
 
@@ -450,6 +452,7 @@ function AppContent() {
       case 'content-gen': return <AutoContent />;
       case 'b2b': return <B2BSystem />;
       case 'mobile-app': return <MobileAppInfo />;
+      case 'full-presentation': return <FullPresentation />;
       case 'language': return <MultiLanguage />;
       default: return <Dashboard />;
     }
