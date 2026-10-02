@@ -118,6 +118,25 @@ const themes: Theme[] = [
     borderColor: 'border-emerald-500/30',
     preview: 'linear-gradient(135deg, #4ade80, #06b6d4, #8b5cf6)',
   },
+  {
+    id: 'cobalt-coral',
+    name: 'Cobalt & Coral',
+    nameAr: 'كوبالت ومرجان',
+    description: 'تصميم جريء ومنعش بألوان أزرق كوبالت والمرجاني الحيوي',
+    colors: {
+      primary: 'from-blue-600 to-indigo-700',
+      secondary: 'from-orange-400 to-red-500',
+      accent: 'from-pink-500 to-rose-500',
+      background: 'from-blue-950 via-slate-900 to-orange-950',
+      surface: 'bg-white/5',
+      text: 'text-white',
+      textSecondary: 'text-gray-300',
+    },
+    gradient: 'from-blue-600 via-indigo-700 to-orange-500',
+    glowColor: 'blue',
+    borderColor: 'border-blue-500/30',
+    preview: 'linear-gradient(135deg, #2563eb, #4338ca, #f97316)',
+  },
 ];
 
 interface ThemeContextType {
