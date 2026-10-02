@@ -23,6 +23,8 @@ import { InterAcademyCompetitions, PodcastSystem, PartnershipsSystem } from './c
 import UserPages from './components/UserPages';
 import ProfessionalQRCode from './components/ProfessionalQRCode';
 import Settings from './components/Settings';
+import { UserAnalytics, AutoSupport, FeedbackSystem, AdvancedReferral } from './components/AdvancedFeatures10';
+import { AutoContent, B2BSystem, MobileAppInfo } from './components/AdvancedFeatures11';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -131,6 +133,13 @@ function Header() {
     { id: 'user-pages', label: 'صفحات المستخدم', icon: '📱' },
     { id: 'qr-code', label: 'QR Code', icon: '📱' },
     { id: 'settings', label: 'الإعدادات', icon: '⚙️' },
+    { id: 'user-analytics', label: 'تحليلات المستخدمين', icon: '📊' },
+    { id: 'support', label: 'الدعم', icon: '🎧' },
+    { id: 'feedback', label: 'التغذية الراجعة', icon: '💬' },
+    { id: 'referral', label: 'الإحالات', icon: '🤝' },
+    { id: 'content-gen', label: 'المحتوى', icon: '📝' },
+    { id: 'b2b', label: 'B2B', icon: '🏢' },
+    { id: 'mobile-app', label: 'التطبيق', icon: '📱' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
   ];
 
@@ -434,6 +443,13 @@ function AppContent() {
       case 'user-pages': return <UserPages />;
       case 'qr-code': return <ProfessionalQRCode />;
       case 'settings': return <Settings />;
+      case 'user-analytics': return <UserAnalytics />;
+      case 'support': return <AutoSupport />;
+      case 'feedback': return <FeedbackSystem />;
+      case 'referral': return <AdvancedReferral />;
+      case 'content-gen': return <AutoContent />;
+      case 'b2b': return <B2BSystem />;
+      case 'mobile-app': return <MobileAppInfo />;
       case 'language': return <MultiLanguage />;
       default: return <Dashboard />;
     }
