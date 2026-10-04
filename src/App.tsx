@@ -26,6 +26,12 @@ import Settings from './components/Settings';
 import { UserAnalytics, AutoSupport, FeedbackSystem, AdvancedReferral } from './components/AdvancedFeatures10';
 import { AutoContent, B2BSystem, MobileAppInfo } from './components/AdvancedFeatures11';
 import FullPresentation from './components/FullPresentation';
+import AnalyticsDashboard from './components/AnalyticsDashboard';
+import SecurityEnhancement from './components/SecurityEnhancement';
+import PerformanceOptimizer from './components/PerformanceOptimizer';
+import SEOEnhancement from './components/SEOEnhancement';
+import AccessibilityEnhancement from './components/AccessibilityEnhancement';
+import MonitoringSystem from './components/MonitoringSystem';
 
 // ============================================
 // 📦 البيانات التجريبية
@@ -142,6 +148,12 @@ function Header() {
     { id: 'b2b', label: 'B2B', icon: '🏢' },
     { id: 'mobile-app', label: 'التطبيق', icon: '📱' },
     { id: 'full-presentation', label: 'العرض الكامل', icon: '📋' },
+    { id: 'analytics-dashboard', label: 'التحليلات', icon: '📊' },
+    { id: 'security', label: 'الأمان', icon: '🔒' },
+    { id: 'performance', label: 'الأداء', icon: '⚡' },
+    { id: 'seo', label: 'SEO', icon: '🔍' },
+    { id: 'accessibility', label: 'الوصول', icon: '♿' },
+    { id: 'monitoring-system', label: 'المراقبة', icon: '📡' },
     { id: 'language', label: 'اللغة', icon: '🌍' },
   ];
 
@@ -453,6 +465,12 @@ function AppContent() {
       case 'b2b': return <B2BSystem />;
       case 'mobile-app': return <MobileAppInfo />;
       case 'full-presentation': return <FullPresentation />;
+      case 'analytics-dashboard': return <AnalyticsDashboard />;
+      case 'security': return <SecurityEnhancement />;
+      case 'performance': return <PerformanceOptimizer />;
+      case 'seo': return <SEOEnhancement />;
+      case 'accessibility': return <AccessibilityEnhancement />;
+      case 'monitoring-system': return <MonitoringSystem />;
       case 'language': return <MultiLanguage />;
       default: return <Dashboard />;
     }
